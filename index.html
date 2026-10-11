@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AP Special TET 2026 · SA Paper IIA · Instant Practice Hub</title>
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      color: #17263d;
+      background: #eef3f9;
+      --primary: #086aa9;
+      --primary-hover: #065588;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --success-border: #22c55e;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --danger-border: #ef4444;
+      --warning: #d97706;
+      --warning-bg: #fef3c7;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding-bottom: 40px; }
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: 1px solid #c8d4e4;
+      border-radius: 9px;
+      background: #fff;
+      padding: 10px 14px;
+      color: #17314c;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+    button:hover:not(:disabled) { background: #e9f4ff; border-color: #9ab6d9; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    button:focus-visible, input:focus-visible { outline: 3px solid #f6ab3f; }
+    button.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    button.primary:hover:not(:disabled) { background: var(--primary-hover); }
+    button.danger { color: #a32335; border-color: #e5b3b9; background: #fff5f6; }
+    button.danger:hover:not(:disabled) { background: #ffe4e8; }
+    button.success { background: var(--success); color: #fff; border-color: var(--success); }
+
+    header {
+      background: #12365e;
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .brand strong { font-size: 1.2rem; }
+    .header-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    .mode-switch {
+      display: inline-flex;
+      background: #0b223d;
+      padding: 4px;
+      border-radius: 10px;
+      gap: 4px;
+    }
+    .mode-switch button {
+      border: none;
+      background: transparent;
+      color: #b0c7e1;
+      padding: 6px 12px;
+      border-radius: 7px;
+      font-size: 0.9rem;
+    }
+    .mode-switch button.active {
+      background: #1e88e5;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .wrap { max-width: 1440px; margin: auto; padding: 16px; }
+    .hero, .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(30, 65, 97, 0.08);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .stat-box {
+      background: #f4f8fc;
+      border: 1px solid #dbe6f3;
+      border-radius: 11px;
+      padding: 14px 16px;
+    }
+    .stat-box small { color: #526577; font-size: 0.85rem; display: block; }
+    .stat-box strong { font-size: 1.45rem; color: #12365e; }
+
+    .section-title { margin: 24px 0 12px; font-size: 1.25rem; color: #12365e; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+    .testgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+    .test-card {
+      background: #fff;
+      border: 1px solid #d0deec;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .test-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(18, 54, 94, 0.1);
+      border-color: var(--primary);
+    }
+    .test-card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .test-card-header b { font-size: 1.1rem; color: #12365e; }
+    .badge {
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 99px;
+      font-weight: 600;
+      background: #e9f2fa;
+      color: #086aa9;
+    }
+    .badge.done { background: var(--success-bg); color: var(--success); }
+    .progress-track {
+      height: 7px;
+      background: #e9eff6;
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 6px 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 99px;
+      transition: width 0.3s;
+    }
+    .test-card-actions { display: flex; gap: 8px; }
+    .test-card-actions button { flex: 1; padding: 8px 10px; font-size: 0.9rem; }
+
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 6px 0 12px;
+    }
+    .tabs button { white-space: nowrap; font-size: 0.92rem; }
+    .tabs .active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 16px;
+      align-items: start;
+    }
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e6eef7;
+    }
+
+    /* Original crop masking logic */
+    .crop-frame {
+      position: relative;
+      width: max-content;
+      max-width: 100%;
+      margin: 16px auto;
+      background: #fff;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #e2eaf3;
+    }
+    .crop-frame .question-crop {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0;
+      transition: transform 0.2s;
+    }
+    .crop-frame::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      left: var(--ml, 8%);
+      top: 8px;
+      width: var(--mw, 9%);
+      height: 28px;
+      background: #fff;
+      pointer-events: none;
+    }
+
+    /* Option list with instant feedback */
+    .option-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .option-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      border: 2px solid #cbd8e8;
+      border-radius: 11px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      transition: all 0.15s;
+    }
+    .option-btn:hover { background: #f4f9ff; border-color: #8ab8e6; }
+    .option-btn .opt-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #eef3f9;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #17314c;
+    }
+    .option-btn.selected {
+      background: #d8eeff;
+      border-color: var(--primary);
+    }
+    .option-btn.selected .opt-circle {
+      background: var(--primary);
+      color: #fff;
+    }
+    /* Instant Practice Mode Feedback */
+    .option-btn.correct-reveal {
+      background: var(--success-bg) !important;
+      border-color: var(--success-border) !important;
+      color: #065f46 !important;
+    }
+    .option-btn.correct-reveal .opt-circle {
+      background: var(--success) !important;
+      color: #fff !important;
+    }
+    .option-btn.wrong-reveal {
+      background: var(--danger-bg) !important;
+      border-color: var(--danger-border) !important;
+      color: #991b1b !important;
+    }
+    .option-btn.wrong-reveal .opt-circle {
+      background: var(--danger) !important;
+      color: #fff !important;
+    }
+
+    .feedback-banner {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .feedback-banner.correct {
+      background: var(--success-bg);
+      color: #065f46;
+      border: 1px solid var(--success-border);
+    }
+    .feedback-banner.wrong {
+      background: var(--danger-bg);
+      color: #991b1b;
+      border: 1px solid var(--danger-border);
+    }
+    .feedback-banner.peek {
+      background: var(--warning-bg);
+      color: #92400e;
+      border: 1px solid #f59e0b;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid #e6eef7;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      max-height: 360px;
+      overflow-y: auto;
+      padding: 4px;
+    }
+    .palette button { padding: 8px 0; font-size: 0.9rem; font-weight: 600; }
+    .palette .current { outline: 3px solid #ef9c33; z-index: 2; }
+    .palette .answered { background: #dbeafe; border-color: #60a5fa; color: #1e40af; }
+    .palette .correct-pal { background: var(--success-bg); border-color: var(--success-border); color: #065f46; }
+    .palette .wrong-pal { background: var(--danger-bg); border-color: var(--danger-border); color: #991b1b; }
+    .palette .review { background: #eee1ff; border-color: #9870c2; color: #5b21b6; }
+
+    .legend { font-size: 0.82rem; line-height: 1.6; color: #4a5d70; margin-bottom: 10px; }
+    .timer { font-variant-numeric: tabular-nums; font-size: 1.1rem; font-weight: 700; background: #1e4675; padding: 6px 12px; border-radius: 8px; }
+
+    /* Study / Revision Sheet Mode */
+    .study-card {
+      background: #fff;
+      border: 1px solid #d8e3ef;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+    .study-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eef3f9;
+    }
+    .study-ans-pill {
+      background: var(--success-bg);
+      color: #065f46;
+      border: 1px solid var(--success-border);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout { display: block; }
+      aside { margin-top: 16px; }
+      .wrap { padding: 10px; }
+      .hero, .card { padding: 14px; }
+      .palette { grid-template-columns: repeat(8, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .palette { grid-template-columns: repeat(5, 1fr); }
+      .option-list { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand" onclick="list()">
+      <strong>AP Special TET 2026 · SA Paper IIA (Maths &amp; Science)</strong>
+    </div>
+    <div class="header-controls">
+      <div class="mode-switch" id="modeSwitch" style="display:none">
+        <button id="btnInstantMode" class="active" onclick="setPracticeMode(true)" title="Shows right/wrong answer immediately when you click an option">⚡ Instant Answer Mode</button>
+        <button id="btnExamMode" onclick="setPracticeMode(false)" title="Simulates real exam - answers shown after submit">📝 Real Exam Mode</button>
+      </div>
+      <span id="clock" class="timer">Loading Question Bank...</span>
+    </div>
+  </header>
+
+  <main class="wrap" id="app">
+    <div class="hero" style="text-align:center; padding: 40px 20px;">
+      <h2>Loading 12 Practice Tests &amp; Question Images...</h2>
+      <p style="color:#526577">Fetching question bank from server. Please wait a few seconds...</p>
+    </div>
+  </main>
+
+  <!-- Load Image Scripts Directly from Official Practice Server -->
+  <script src="https://tet2026.govtjobnews9.com/paper2a/maths-science/assets/cdp-images.js"></script>
+  <script src="https://tet2026.govtjobnews9.com/paper2a/maths-science/assets/telugu-images.js"></script>
+  <script src="https://tet2026.govtjobnews9.com/paper2a/maths-science/assets/english-images.js"></script>
+  <script src="https://tet2026.govtjobnews9.com/paper2a/maths-science/assets/mathematics-images.js"></script>
+  <script src="https://tet2026.govtjobnews9.com/paper2a/maths-science/assets/physical-science-images.js"></script>
+  <script src="https://tet2026.govtjobnews9.com/paper2a/maths-science/assets/biological-science-images.js"></script>
+
+  <script>
+    const names = ['CDP', 'Telugu', 'English', 'Mathematics', 'Physical Science', 'Biological Science'];
+    const sizes = [30, 30, 30, 20, 20, 20];
+    const minutes = [30, 30, 30, 20, 20, 20];
+    const offsets = [0, 30, 60, 90, 110, 130];
+
+    let bank = null;
+    let state = null;
+    let tick = null;
+    let instantMode = true; // Default to Instant Answer Mode as requested!
+    let peeked = false;
+    let autoNextDelay = false;
+
+    const app = document.getElementById('app');
+    const clock = document.getElementById('clock');
+    const modeSwitch = document.getElementById('modeSwitch');
+
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    // Storage helpers so Mother never loses her progress
+    const STORAGE_KEY = 'ap_tet_2026_maths_sci_v1';
+    function loadSavedData() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { tests: {}, mistakes: {} };
+      } catch (e) {
+        return { tests: {}, mistakes: {} };
+      }
+    }
+    function saveCurrentTestState() {
+      if (!state || state.isCustom) return;
+      const store = loadSavedData();
+      store.tests[state.test] = {
+        answer: state.answer,
+        seen: state.seen,
+        marked: state.marked,
+        at: state.at,
+        left: state.left,
+        done: state.done,
+        updatedAt: Date.now()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+    }
+    function recordMistake(q, isWrong) {
+      const store = loadSavedData();
+      const key = q.s + ':' + q.n;
+      if (isWrong) {
+        store.mistakes[key] = { s: q.s, n: q.n, type: q.type, time: Date.now() };
+      } else if (store.mistakes[key]) {
+        delete store.mistakes[key];
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+    }
+
+    async function initApp() {
+      try {
+        const res = await fetch('bank.json');
+        bank = await res.json();
+        bank.images = window.QuizImages || {};
+        list();
+      } catch (err) {
+        app.innerHTML = `<div class="hero"><h2>Error loading bank.json</h2><p>${esc(err.message)}</p></div>`;
+      }
+    }
+
+    function setPracticeMode(isInstant) {
+      instantMode = isInstant;
+      document.getElementById('btnInstantMode').className = instantMode ? 'active' : '';
+      document.getElementById('btnExamMode').className = !instantMode ? 'active' : '';
+      if (state && !state.done) render();
+    }
+
+    function list() {
+      clearInterval(tick);
+      modeSwitch.style.display = 'none';
+      clock.textContent = 'Exam Date: 15 Oct · 12 Mock Tests';
+
+      const store = loadSavedData();
+      const mistakeKeys = Object.keys(store.mistakes || {});
+      let totalAnswered = 0;
+      let totalCorrect = 0;
+
+      for (let t = 1; t <= 12; t++) {
+        const saved = store.tests[t];
+        if (saved && saved.answer) {
+          const qList = buildTestQuestions(t - 1);
+          saved.answer.forEach((ans, idx) => {
+            if (ans > 0) {
+              totalAnswered++;
+              const q = qList[idx];
+              if (ans === bank.questions[q.s][String(q.n)]) totalCorrect++;
+            }
+          });
+        }
+      }
+
+      const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+
+      // Build 12 Practice Tests Cards
+      const testCards = Array.from({ length: 12 }, (_, i) => {
+        const tNum = i + 1;
+        const saved = store.tests[tNum];
+        const qList = buildTestQuestions(i);
+        let ansCount = 0;
+        let correctCount = 0;
+        if (saved && saved.answer) {
+          saved.answer.forEach((a, idx) => {
+            if (a > 0) {
+              ansCount++;
+              if (a === bank.questions[qList[idx].s][String(qList[idx].n)]) correctCount++;
+            }
+          });
+        }
+        const pct = Math.round((ansCount / 150) * 100);
+        return `
+          <div class="test-card">
+            <div>
+              <div class="test-card-header">
+                <b>Practice Test ${tNum}</b>
+                <span class="badge ${ansCount === 150 ? 'done' : ''}">${ansCount} / 150 Done</span>
+              </div>
+              <small style="color:#526577; display:block; margin-top:4px;">
+                ${ansCount > 0 ? `Score so far: <b>${correctCount}/${ansCount}</b> (${Math.round(correctCount/ansCount*100)}%)` : '150 Questions · 150 Mins'}
+              </small>
+              <div class="progress-track">
+                <div class="progress-fill" style="width:${pct}%"></div>
+              </div>
+            </div>
+            <div class="test-card-actions">
+              <button class="primary" onclick="start(${i}, false)">
+                ${ansCount > 0 && ansCount < 150 ? '▶ Resume' : ansCount === 150 ? '🔄 Review / Practice' : '▶ Start Test'}
+              </button>
+              <button onclick="openStudySheet(${i})" title="Quickly read all 150 questions with answers highlighted">📖 Quick Read</button>
+              ${ansCount > 0 ? `<button class="danger" style="flex:0" onclick="resetTest(${tNum})" title="Reset Progress">↺</button>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Subject-wise Practice Cards
+      const subjectCards = names.map((s) => {
+        const totalQ = Object.keys(bank.questions[s] || {}).length;
+        return `
+          <div class="test-card">
+            <div>
+              <div class="test-card-header">
+                <b>${esc(s)}</b>
+                <span class="badge">${totalQ} Questions</span>
+              </div>
+              <small style="color:#526577; display:block; margin-top:4px;">All unique questions from question bank</small>
+            </div>
+            <div class="test-card-actions">
+              <button class="primary" onclick="startSubject('${esc(s)}')">⚡ Practice</button>
+              <button onclick="openSubjectStudySheet('${esc(s)}')">📖 Read All</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      app.innerHTML = `
+        <div class="hero">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+            <div>
+              <h1 style="margin:0 0 6px; color:#12365e;">AP Special TET 2026 · Mother's Practice Portal</h1>
+              <p style="margin:0; color:#425669;">
+                <b>⚡ Instant Answer Mode Enabled:</b> As soon as an option is clicked, it immediately highlights <span style="color:var(--success);font-weight:700;">Green (Correct)</span> or <span style="color:var(--danger);font-weight:700;">Red (Wrong)</span> and shows the right option! Progress is saved automatically.
+              </p>
+            </div>
+            ${mistakeKeys.length > 0 ? `
+              <button class="danger" style="font-weight:700; padding:12px 18px;" onclick="startMistakes()">
+                🎯 Practice Wrong Questions (${mistakeKeys.length})
+              </button>
+            ` : ''}
+          </div>
+
+          <div class="stats-bar">
+            <div class="stat-box">
+              <small>Questions Practiced</small>
+              <strong>${totalAnswered} / 1800</strong>
+            </div>
+            <div class="stat-box">
+              <small>Correct Answers</small>
+              <strong style="color:var(--success)">${totalCorrect} (${accuracy}%)</strong>
+            </div>
+            <div class="stat-box">
+              <small>Mistakes to Review</small>
+              <strong style="color:var(--danger)">${mistakeKeys.length} Questions</strong>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="section-title">
+          <span>📋 All 12 Full Practice Tests (150 Questions Each)</span>
+          <small style="font-size:0.9rem; font-weight:normal; color:#526577;">Click "▶ Start / Resume" for interactive practice, or "📖 Quick Read" to view all answers at once</small>
+        </h2>
+        <div class="testgrid">${testCards}</div>
+
+        <h2 class="section-title">
+          <span>📚 Subject-wise Complete Question Bank</span>
+          <small style="font-size:0.9rem; font-weight:normal; color:#526577;">Practice or revise all questions of a single subject in one place</small>
+        </h2>
+        <div class="testgrid">${subjectCards}</div>
+      `;
+    }
+
+    function buildTestQuestions(tIndex) {
+      return bank.testOrder[tIndex].map((n, i) => {
+        let idx = sizes.findIndex((v, j) => i >= offsets[j] && i < offsets[j] + v);
+        return {
+          s: names[idx],
+          n,
+          type: idx < 3 ? 'Content' : n > 192 ? 'Methodology' : 'Content'
+        };
+      });
+    }
+
+    function resetTest(tNum) {
+      if (!confirm(`Clear saved answers for Practice Test ${tNum}?`)) return;
+      const store = loadSavedData();
+      delete store.tests[tNum];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+      list();
+    }
+
+    function start(tIndex) {
+      const tNum = tIndex + 1;
+      const q = buildTestQuestions(tIndex);
+      const store = loadSavedData();
+      const saved = store.tests[tNum];
+
+      if (saved && saved.answer && saved.answer.length === 150) {
+        state = {
+          title: `Practice Test ${tNum}`,
+          test: tNum,
+          isCustom: false,
+          q,
+          answer: saved.answer,
+          seen: saved.seen || Array(150).fill(false),
+          marked: saved.marked || Array(150).fill(false),
+          at: saved.at || 0,
+          left: saved.left || 9000,
+          done: false
+        };
+      } else {
+        state = {
+          title: `Practice Test ${tNum}`,
+          test: tNum,
+          isCustom: false,
+          q,
+          answer: Array(150).fill(0),
+          seen: Array(150).fill(false),
+          marked: Array(150).fill(false),
+          at: 0,
+          left: 9000,
+          done: false
+        };
+      }
+      state.seen[state.at] = true;
+      peeked = false;
+      modeSwitch.style.display = 'inline-flex';
+      startTimer();
+      render();
+    }
+
+    function startSubject(subjectName) {
+      const qNums = Object.keys(bank.questions[subjectName]).map(Number).sort((a, b) => a - b);
+      const q = qNums.map(n => ({
+        s: subjectName,
+        n,
+        type: ['CDP', 'Telugu', 'English'].includes(subjectName) ? 'Content' : (n > 192 ? 'Methodology' : 'Content')
+      }));
+      state = {
+        title: `${subjectName} · Complete Bank (${q.length} Q)`,
+        test: subjectName,
+        isCustom: true,
+        q,
+        answer: Array(q.length).fill(0),
+        seen: Array(q.length).fill(false),
+        marked: Array(q.length).fill(false),
+        at: 0,
+        left: q.length * 60,
+        done: false
+      };
+      state.seen[0] = true;
+      peeked = false;
+      modeSwitch.style.display = 'inline-flex';
+      startTimer();
+      render();
+    }
+
+    function startMistakes() {
+      const store = loadSavedData();
+      const items = Object.values(store.mistakes || {});
+      if (!items.length) return;
+      state = {
+        title: `Mistake Review (${items.length} Questions)`,
+        test: 'Mistakes',
+        isCustom: true,
+        q: items,
+        answer: Array(items.length).fill(0),
+        seen: Array(items.length).fill(false),
+        marked: Array(items.length).fill(false),
+        at: 0,
+        left: items.length * 60,
+        done: false
+      };
+      state.seen[0] = true;
+      peeked = false;
+      modeSwitch.style.display = 'inline-flex';
+      startTimer();
+      render();
+    }
+
+    function startTimer() {
+      clearInterval(tick);
+      tick = setInterval(() => {
+        if (!state || state.done) return;
+        state.left--;
+        updateClock();
+        if (state.left <= 0 && !instantMode) submit(true);
+      }, 1000);
+    }
+
+    function updateClock() {
+      if (!state) return;
+      let x = Math.max(0, state.left);
+      clock.textContent = '⏱ ' + String(Math.floor(x / 60)).padStart(2, '0') + ':' + String(x % 60).padStart(2, '0');
+    }
+
+    function go(i) {
+      if (!state || i < 0 || i >= state.q.length) return;
+      state.at = i;
+      state.seen[i] = true;
+      peeked = false;
+      saveCurrentTestState();
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function choose(v) {
+      state.answer[state.at] = v;
+      const q = state.q[state.at];
+      const correct = bank.questions[q.s][String(q.n)];
+      recordMistake(q, v !== correct);
+      saveCurrentTestState();
+      render();
+    }
+
+    function clearAnswer() {
+      state.answer[state.at] = 0;
+      peeked = false;
+      saveCurrentTestState();
+      render();
+    }
+
+    function togglePeek() {
+      peeked = !peeked;
+      render();
+    }
+
+    function mark() {
+      state.marked[state.at] = !state.marked[state.at];
+      saveCurrentTestState();
+      go(Math.min(state.q.length - 1, state.at + 1));
+    }
+
+    function questionMarkup(q, userAns, showFeedback) {
+      const key = q.s + ':' + q.n;
+      const image = bank.images[key];
+      const mask = bank.masks[key] || [0, 0];
+      const correct = bank.questions[q.s][String(q.n)];
+
+      const optionsHtml = [1, 2, 3, 4].map(j => {
+        let cls = 'option-btn';
+        let badge = '';
+        if (showFeedback && (userAns > 0 || peeked)) {
+          if (j === correct) {
+            cls += ' correct-reveal';
+            badge = '<span>✔ Correct Answer</span>';
+          } else if (userAns === j && j !== correct) {
+            cls += ' wrong-reveal';
+            badge = '<span>✖ Your Choice</span>';
+          }
+        } else if (userAns === j) {
+          cls += ' selected';
+          badge = '<span>Selected</span>';
+        }
+        return `
+          <button type="button" class="${cls}" onclick="choose(${j})">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span class="opt-circle">${j}</span>
+              <span>Option (${j})</span>
+            </div>
+            ${badge}
+          </button>
+        `;
+      }).join('');
+
+      let bannerHtml = '';
+      if (showFeedback && userAns > 0) {
+        if (userAns === correct) {
+          bannerHtml = `
+            <div class="feedback-banner correct">
+              <span>🎉 Correct! Option (${correct}) is the right answer.</span>
+              <button class="success" style="padding:6px 14px;" onclick="go(${Math.min(state.q.length - 1, state.at + 1)})">Next Question ➔</button>
+            </div>
+          `;
+        } else {
+          bannerHtml = `
+            <div class="feedback-banner wrong">
+              <span>❌ Incorrect. You chose Option (${userAns}), but the correct answer is <b>Option (${correct})</b>.</span>
+              <button class="primary" style="padding:6px 14px;" onclick="go(${Math.min(state.q.length - 1, state.at + 1)})">Next Question ➔</button>
+            </div>
+          `;
+        }
+      } else if (showFeedback && peeked) {
+        bannerHtml = `
+          <div class="feedback-banner peek">
+            <span>💡 Answer Revealed: The correct answer is <b>Option (${correct})</b>.</span>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="crop-frame" style="--ml:${mask[0]}%;--mw:${mask[1]}%">
+          ${image ? `<img class="question-crop" alt="${esc(q.s)} question" src="data:image/webp;base64,${image}">` : `<p style="padding:20px;color:#a32335;">Image still loading... Please wait a moment and click refresh.</p>`}
+        </div>
+        <div class="option-list">${optionsHtml}</div>
+        ${bannerHtml}
+      `;
+    }
+
+    function render() {
+      updateClock();
+      const i = state.at;
+      const q = state.q[i];
+      const total = state.q.length;
+      const userAns = state.answer[i];
+
+      let tabs = '';
+      let paletteStart = 0;
+      let paletteLen = total;
+
+      if (!state.isCustom) {
+        const section = names.indexOf(q.s);
+        paletteStart = offsets[section];
+        paletteLen = sizes[section];
+        tabs = `<nav class="tabs">` + names.map((s, n) => {
+          const secIds = Array.from({ length: sizes[n] }, (_, k) => offsets[n] + k);
+          const secAns = secIds.filter(idx => state.answer[idx] > 0).length;
+          return `<button class="${section === n ? 'active' : ''}" onclick="go(${offsets[n]})">${esc(s)} (${secAns}/${sizes[n]})</button>`;
+        }).join('') + `</nav>`;
+      }
+
+      // Calculate live score
+      let ansCount = 0;
+      let rightCount = 0;
+      state.answer.forEach((a, idx) => {
+        if (a > 0) {
+          ansCount++;
+          const qi = state.q[idx];
+          if (a === bank.questions[qi.s][String(qi.n)]) rightCount++;
+        }
+      });
+
+      const palette = Array.from({ length: paletteLen }, (_, j) => {
+        const k = paletteStart + j;
+        const a = state.answer[k];
+        const qi = state.q[k];
+        const corr = bank.questions[qi.s][String(qi.n)];
+        let klass = (k === i ? ' current' : '');
+        if (state.marked[k]) klass += ' review';
+        else if (a > 0) {
+          if (instantMode) klass += (a === corr ? ' correct-pal' : ' wrong-pal');
+          else klass += ' answered';
+        }
+        return `<button class="${klass}" onclick="go(${k})">${k + 1}</button>`;
+      }).join('');
+
+      app.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <button onclick="list()">← Back to All Tests</button>
+            <h2 style="margin:0; font-size:1.2rem; color:#12365e;">${esc(state.title)}</h2>
+          </div>
+          ${instantMode ? `
+            <div style="background:#fff; padding:8px 14px; border-radius:10px; border:1px solid #d0deec; font-weight:600;">
+              Live Score: <span style="color:var(--success)">✔ ${rightCount} Correct</span> · 
+              <span style="color:var(--danger)">✖ ${ansCount - rightCount} Wrong</span> · 
+              <span>${ansCount}/${total} Attempted</span>
+            </div>
+          ` : ''}
+        </div>
+
+        ${tabs}
+
+        <div class="layout">
+          <div class="card">
+            <div class="toolbar">
+              <div>
+                <b style="font-size:1.1rem; color:#12365e;">Question ${i + 1} of ${total}</b>
+                <span class="badge" style="margin-left:8px;">${esc(q.s)} · ${esc(q.type)}</span>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button onclick="togglePeek()" style="padding:6px 12px; background:#fffbeb; border-color:#f59e0b; color:#92400e;">
+                  👁 ${peeked ? 'Hide Answer' : 'Show Answer'}
+                </button>
+              </div>
+            </div>
+
+            ${questionMarkup(q, userAns, instantMode)}
+
+            <div class="actions">
+              <button onclick="go(${i - 1})" ${i === 0 ? 'disabled' : ''}>⬅ Previous</button>
+              <button onclick="clearAnswer()">Clear Choice</button>
+              <button onclick="mark()">${state.marked[i] ? 'Unmark Review' : '🔖 Mark for Review'}</button>
+              <button class="primary" style="margin-left:auto; padding:10px 22px;" onclick="go(${Math.min(total - 1, i + 1)})" ${i === total - 1 ? 'disabled' : ''}>
+                Next Question ➔
+              </button>
+            </div>
+          </div>
+
+          <aside class="card">
+            <h3 style="margin-top:0; color:#12365e;">${state.isCustom ? 'Questions' : esc(q.s) + ' Palette'}</h3>
+            <p class="legend">
+              ${instantMode
+                ? '🟢 Green: Correct · 🔴 Red: Wrong · 🟣 Purple: Review'
+                : '🔵 Blue: Answered · 🟣 Purple: Review'}
+            </p>
+            <div class="palette">${palette}</div>
+            <div style="margin-top:16px; display:grid; gap:8px;">
+              <button class="primary" onclick="submit(false)">📊 View Full Scorecard &amp; Summary</button>
+              <button onclick="list()">🏠 Save &amp; Return Home</button>
+            </div>
+          </aside>
+        </div>
+      `;
+    }
+
+    function submit(auto = false) {
+      state.done = true;
+      clearInterval(tick);
+      saveCurrentTestState();
+      results();
+    }
+
+    function results() {
+      clock.textContent = 'Scorecard Summary';
+      const total = state.q.length;
+
+      let sectionRows = '';
+      if (!state.isCustom) {
+        const sections = names.map((s, idx) => {
+          const ids = Array.from({ length: sizes[idx] }, (_, j) => offsets[idx] + j);
+          const right = ids.filter(i => state.answer[i] === bank.questions[state.q[i].s][String(state.q[i].n)]).length;
+          const attempt = ids.filter(i => state.answer[i] > 0).length;
+          return { s, right, size: sizes[idx], attempt };
+        });
+        sectionRows = `
+          <h2>Subject-wise Breakdown</h2>
+          <table>
+            <tr><th>Subject</th><th>Correct</th><th>Attempted</th><th>Accuracy</th></tr>
+            ${sections.map(x => `
+              <tr>
+                <td><b>${esc(x.s)}</b></td>
+                <td style="color:var(--success);font-weight:700;">${x.right} / ${x.size}</td>
+                <td>${x.attempt} / ${x.size}</td>
+                <td>${x.attempt ? Math.round((x.right / x.attempt) * 100) + '%' : '-'}</td>
+              </tr>
+            `).join('')}
+          </table>
+        `;
+      }
+
+      const rightTotal = state.q.filter((q, i) => state.answer[i] === bank.questions[q.s][String(q.n)]).length;
+      const attemptTotal = state.answer.filter(Boolean).length;
+
+      app.innerHTML = `
+        <div class="hero">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <h1 style="margin:0;">${esc(state.title)} · Scorecard</h1>
+            <button onclick="list()">← Back to All Tests</button>
+          </div>
+          <div class="stats-bar">
+            <div class="stat-box">
+              <small>Total Score</small>
+              <strong style="color:var(--primary)">${rightTotal} / ${total}</strong>
+            </div>
+            <div class="stat-box">
+              <small>Attempted</small>
+              <strong>${attemptTotal}</strong>
+            </div>
+            <div class="stat-box">
+              <small>Correct Answers</small>
+              <strong style="color:var(--success)">${rightTotal}</strong>
+            </div>
+            <div class="stat-box">
+              <small>Wrong Answers</small>
+              <strong style="color:var(--danger)">${attemptTotal - rightTotal}</strong>
+            </div>
+          </div>
+          ${sectionRows}
+          <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="primary" onclick="state.done=false; render()">🔍 Return to Questions &amp; Review Answers</button>
+            <button onclick="list()">🏠 All Practice Tests</button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Quick Read / Study Sheet Mode (View all questions + answers on one page)
+    function openStudySheet(tIndex) {
+      clearInterval(tick);
+      modeSwitch.style.display = 'none';
+      const tNum = tIndex + 1;
+      clock.textContent = `Practice Test ${tNum} · Master Revision Sheet`;
+      const qList = buildTestQuestions(tIndex);
+      renderStudySheet(`Practice Test ${tNum} · All 150 Questions with Answers`, qList, 0);
+    }
+
+    function openSubjectStudySheet(subjectName) {
+      clearInterval(tick);
+      modeSwitch.style.display = 'none';
+      clock.textContent = `${subjectName} · Master Revision Sheet`;
+      const qNums = Object.keys(bank.questions[subjectName]).map(Number).sort((a, b) => a - b);
+      const qList = qNums.map(n => ({
+        s: subjectName,
+        n,
+        type: ['CDP', 'Telugu', 'English'].includes(subjectName) ? 'Content' : (n > 192 ? 'Methodology' : 'Content')
+      }));
+      renderStudySheet(`${subjectName} · Complete Question Bank (${qList.length} Questions)`, qList, 0);
+    }
+
+    let currentStudyList = [];
+    let currentStudyTitle = '';
+    function renderStudySheet(title, qList, page = 0) {
+      currentStudyList = qList;
+      currentStudyTitle = title;
+      const pageSize = 30;
+      const totalPages = Math.ceil(qList.length / pageSize);
+      const slice = qList.slice(page * pageSize, (page + 1) * pageSize);
+
+      const pageButtons = Array.from({ length: totalPages }, (_, p) => {
+        const startQ = p * pageSize + 1;
+        const endQ = Math.min(qList.length, (p + 1) * pageSize);
+        return `<button class="${p === page ? 'primary' : ''}" onclick="renderStudySheet(currentStudyTitle, currentStudyList, ${p})">Q ${startQ}–${endQ}</button>`;
+      }).join('');
+
+      const cardsHtml = slice.map((q, idx) => {
+        const qIndex = page * pageSize + idx + 1;
+        const key = q.s + ':' + q.n;
+        const image = bank.images[key];
+        const mask = bank.masks[key] || [0, 0];
+        const correct = bank.questions[q.s][String(q.n)];
+
+        return `
+          <div class="study-card">
+            <div class="study-header">
+              <div>
+                <b style="font-size:1.1rem; color:#12365e;">Question #${qIndex}</b>
+                <span class="badge" style="margin-left:8px;">${esc(q.s)} · ${esc(q.type)}</span>
+              </div>
+              <span class="study-ans-pill">✔ Correct Answer: Option (${correct})</span>
+            </div>
+            <div class="crop-frame" style="--ml:${mask[0]}%;--mw:${mask[1]}%">
+              <img class="question-crop" loading="lazy" alt="${esc(q.s)} question" src="data:image/webp;base64,${image}">
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      app.innerHTML = `
+        <div class="hero">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <div>
+              <h1 style="margin:0 0 4px;">📖 ${esc(title)}</h1>
+              <p style="margin:0; color:#526577;">Fast revision mode for your mother: Read each question with its correct option highlighted immediately.</p>
+            </div>
+            <button onclick="list()">← Back to All Tests</button>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;">
+            ${pageButtons}
+          </div>
+        </div>
+        ${cardsHtml}
+        <div class="hero" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">${pageButtons}</div>
+          <button onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆ Back to Top</button>
+        </div>
+      `;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Keyboard shortcuts (1, 2, 3, 4 to pick option; Left/Right arrows for Prev/Next)
+    window.addEventListener('keydown', (e) => {
+      if (!state || state.done) return;
+      if (['1', '2', '3', '4'].includes(e.key)) {
+        choose(Number(e.key));
+      } else if (e.key === 'ArrowRight') {
+        go(Math.min(state.q.length - 1, state.at + 1));
+      } else if (e.key === 'ArrowLeft') {
+        go(Math.max(0, state.at - 1));
+      }
+    });
+
+    // Wait for external image scripts to finish loading
+    window.addEventListener('load', initApp);
+  </script>
+</body>
+</html>
