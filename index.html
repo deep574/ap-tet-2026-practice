@@ -353,6 +353,44 @@
       font-size: 1rem;
     }
 
+    /* Motivational Telugu Quote Banner */
+    .quote-banner {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid #f59e0b;
+      border-left: 6px solid #d97706;
+      border-radius: 13px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 10px rgba(217, 119, 6, 0.08);
+    }
+    .quote-text {
+      font-size: 1.08rem;
+      line-height: 1.6;
+      color: #78350f;
+      font-weight: 600;
+    }
+    .quote-sub {
+      display: block;
+      font-size: 0.88rem;
+      color: #92400e;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .wrong-ans-pill {
+      background: var(--danger-bg);
+      color: #991b1b;
+      border: 1px solid var(--danger-border);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
     @media (max-width: 860px) {
       .layout { display: block; }
       aside { margin-top: 16px; }
@@ -400,6 +438,39 @@
     const sizes = [30, 30, 30, 20, 20, 20];
     const minutes = [30, 30, 30, 20, 20, 20];
     const offsets = [0, 30, 60, 90, 110, 130];
+
+    const teluguQuotes = [
+      {
+        q: "“అమ్మా! నీ పట్టుదల, నీ కష్టమే రేపటి నీ విజయానికి పునాది. ఈ పరీక్షలో నువ్వు ఖచ్చితంగా ఘనవిజయం సాధిస్తావు!”",
+        sub: "💐 అక్టోబర్ 15 AP Special TET పరీక్షకు ఆల్ ది బెస్ట్ అమ్మా!"
+      },
+      {
+        q: "“తప్పుల నుండి నేర్చుకునేవారే విజేతలుగా నిలుస్తారు. ఈరోజు నువ్వు సరిదిద్దుకునే ప్రతి ప్రశ్న, రేపు పరీక్షలో నీకు ఒక మార్కును తెచ్చిపెడుతుంది!”",
+        sub: "🌟 ఆత్మవిశ్వాసంతో ప్రాక్టీస్ చేయి అమ్మా, విజయం నీదే!"
+      },
+      {
+        q: "“కష్టపడి చదివే ప్రతి నిమిషం నిన్ను నీ లక్ష్యానికి మరింత దగ్గర చేస్తుంది. నీ మీద నీకు నమ్మకం ఉంచు అమ్మా!”",
+        sub: "✨ ఉపాధ్యాయురాలిగా నీ ప్రయాణం మరింత ఉన్నతంగా సాగాలని కోరుకుంటూ..."
+      },
+      {
+        q: "“ఓర్పు, సహనం, నిరంతర సాధన ఉన్నవారిని ఏ పరీక్షా ఆపలేదు. నువ్వు తప్పకుండా గొప్ప స్కోరు సాధిస్తావు అమ్మా!”",
+        sub: "🎯 ప్రశాంతంగా చదువుకో అమ్మా, మేమంతా నీకు తోడుగా ఉన్నాము!"
+      },
+      {
+        q: "“విజయం అనేది ఒక రోజులో వచ్చేది కాదు, కానీ ప్రతిరోజూ చేసే చిన్న ప్రయత్నమే పెద్ద విజయాన్ని ఇస్తుంది!”",
+        sub: "💪 ఆల్ ది వెరీ బెస్ట్ అమ్మా! నువ్వు ఖచ్చితంగా సాధిస్తావు!"
+      }
+    ];
+    let quoteIdx = 0;
+    function nextQuote() {
+      quoteIdx = (quoteIdx + 1) % teluguQuotes.length;
+      const elQ = document.getElementById('quoteText');
+      const elS = document.getElementById('quoteSub');
+      if (elQ && elS) {
+        elQ.textContent = teluguQuotes[quoteIdx].q;
+        elS.textContent = teluguQuotes[quoteIdx].sub;
+      }
+    }
 
     let bank = null;
     let state = null;
@@ -499,11 +570,13 @@
         const qList = buildTestQuestions(i);
         let ansCount = 0;
         let correctCount = 0;
+        let wrongCount = 0;
         if (saved && saved.answer) {
           saved.answer.forEach((a, idx) => {
             if (a > 0) {
               ansCount++;
               if (a === bank.questions[qList[idx].s][String(qList[idx].n)]) correctCount++;
+              else wrongCount++;
             }
           });
         }
@@ -516,18 +589,32 @@
                 <span class="badge ${ansCount === 150 ? 'done' : ''}">${ansCount} / 150 Done</span>
               </div>
               <small style="color:#526577; display:block; margin-top:4px;">
-                ${ansCount > 0 ? `Score so far: <b>${correctCount}/${ansCount}</b> (${Math.round(correctCount/ansCount*100)}%)` : '150 Questions · 150 Mins'}
+                ${ansCount > 0
+                  ? `✔ Correct: <b style="color:var(--success)">${correctCount}</b> · ❌ Wrong: <b style="color:var(--danger)">${wrongCount}</b> (${Math.round(correctCount/ansCount*100)}%)`
+                  : '150 Questions · 150 Mins'}
               </small>
               <div class="progress-track">
                 <div class="progress-fill" style="width:${pct}%"></div>
               </div>
             </div>
-            <div class="test-card-actions">
-              <button class="primary" onclick="start(${i}, false)">
-                ${ansCount > 0 && ansCount < 150 ? '▶ Resume' : ansCount === 150 ? '🔄 Review / Practice' : '▶ Start Test'}
-              </button>
-              <button onclick="openStudySheet(${i})" title="Quickly read all 150 questions with answers highlighted">📖 Quick Read</button>
-              ${ansCount > 0 ? `<button class="danger" style="flex:0" onclick="resetTest(${tNum})" title="Reset Progress">↺</button>` : ''}
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <div class="test-card-actions">
+                <button class="primary" onclick="start(${i}, false)">
+                  ${ansCount > 0 && ansCount < 150 ? '▶ Resume' : ansCount === 150 ? '🔄 Review / Practice' : '▶ Start Test'}
+                </button>
+                <button onclick="openStudySheet(${i})" title="Quickly read all 150 questions with answers highlighted">📖 Quick Read</button>
+                ${ansCount > 0 ? `<button class="danger" style="flex:0" onclick="resetTest(${tNum})" title="Reset Progress">↺</button>` : ''}
+              </div>
+              ${wrongCount > 0 ? `
+                <div class="test-card-actions">
+                  <button class="danger" style="font-weight:700;" onclick="openTestWrongSheet(${i})" title="View & Verify ONLY the ${wrongCount} wrong answers you kept in Test ${tNum}">
+                    ❌ Show Only Wrong Answers (${wrongCount})
+                  </button>
+                  <button style="flex:0; white-space:nowrap; border-color:#e5b3b9; color:#a32335;" onclick="startTestWrongInteractive(${i})" title="Re-practice only the ${wrongCount} wrong questions of Test ${tNum}">
+                    🎯 Retry (${wrongCount})
+                  </button>
+                </div>
+              ` : ''}
             </div>
           </div>
         `;
@@ -553,7 +640,19 @@
         `;
       }).join('');
 
+      const curQuote = teluguQuotes[quoteIdx];
+
       app.innerHTML = `
+        <div class="quote-banner">
+          <div>
+            <div class="quote-text" id="quoteText">${esc(curQuote.q)}</div>
+            <span class="quote-sub" id="quoteSub">${esc(curQuote.sub)}</span>
+          </div>
+          <button onclick="nextQuote()" style="background:#fff; border-color:#f59e0b; color:#92400e; font-size:0.86rem; padding:7px 12px; white-space:nowrap;">
+            ✨ మరో మంచి మాట (Next Quote)
+          </button>
+        </div>
+
         <div class="hero">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
             <div>
@@ -564,7 +663,7 @@
             </div>
             ${mistakeKeys.length > 0 ? `
               <button class="danger" style="font-weight:700; padding:12px 18px;" onclick="startMistakes()">
-                🎯 Practice Wrong Questions (${mistakeKeys.length})
+                🎯 Practice All Wrong Questions (${mistakeKeys.length})
               </button>
             ` : ''}
           </div>
@@ -587,7 +686,7 @@
 
         <h2 class="section-title">
           <span>📋 All 12 Full Practice Tests (150 Questions Each)</span>
-          <small style="font-size:0.9rem; font-weight:normal; color:#526577;">Click "▶ Start / Resume" for interactive practice, or "📖 Quick Read" to view all answers at once</small>
+          <small style="font-size:0.9rem; font-weight:normal; color:#526577;">Click "▶ Start / Resume" for interactive practice, or "❌ Show Only Wrong Answers" on any test to verify mistakes</small>
         </h2>
         <div class="testgrid">${testCards}</div>
 
@@ -628,7 +727,9 @@
         state = {
           title: `Practice Test ${tNum}`,
           test: tNum,
+          tIndex: tIndex,
           isCustom: false,
+          onlyWrongFilter: false,
           q,
           answer: saved.answer,
           seen: saved.seen || Array(150).fill(false),
@@ -641,7 +742,9 @@
         state = {
           title: `Practice Test ${tNum}`,
           test: tNum,
+          tIndex: tIndex,
           isCustom: false,
+          onlyWrongFilter: false,
           q,
           answer: Array(150).fill(0),
           seen: Array(150).fill(false),
@@ -656,6 +759,165 @@
       modeSwitch.style.display = 'inline-flex';
       startTimer();
       render();
+    }
+
+    // Interactive practice of ONLY the wrong answers in a specific Test (1-12)
+    function startTestWrongInteractive(tIndex) {
+      const tNum = tIndex + 1;
+      const store = loadSavedData();
+      const saved = store.tests[tNum];
+      const fullQ = buildTestQuestions(tIndex);
+      if (!saved || !saved.answer) return;
+
+      const wrongItems = [];
+      saved.answer.forEach((a, idx) => {
+        const q = fullQ[idx];
+        const corr = bank.questions[q.s][String(q.n)];
+        if (a > 0 && a !== corr) {
+          wrongItems.push({
+            s: q.s,
+            n: q.n,
+            type: q.type,
+            origQNum: idx + 1,
+            prevWrongAns: a,
+            parentTest: tNum,
+            parentIdx: idx
+          });
+        }
+      });
+
+      if (!wrongItems.length) {
+        alert(`No wrong answers found in Practice Test ${tNum}!`);
+        return;
+      }
+
+      state = {
+        title: `Practice Test ${tNum} · Wrong Answers Only (${wrongItems.length} Questions)`,
+        test: `Test_${tNum}_Wrong`,
+        parentTestNum: tNum,
+        isCustom: true,
+        q: wrongItems,
+        answer: Array(wrongItems.length).fill(0),
+        seen: Array(wrongItems.length).fill(false),
+        marked: Array(wrongItems.length).fill(false),
+        at: 0,
+        left: wrongItems.length * 60,
+        done: false
+      };
+      state.seen[0] = true;
+      peeked = false;
+      modeSwitch.style.display = 'inline-flex';
+      startTimer();
+      render();
+    }
+
+    // View & Verify Sheet of ONLY the wrong answers kept in a specific Test (1-12)
+    function openTestWrongSheet(tIndex) {
+      clearInterval(tick);
+      modeSwitch.style.display = 'none';
+      const tNum = tIndex + 1;
+      const store = loadSavedData();
+      const saved = store.tests[tNum];
+      const fullQ = buildTestQuestions(tIndex);
+
+      const wrongItems = [];
+      if (saved && saved.answer) {
+        saved.answer.forEach((a, idx) => {
+          const q = fullQ[idx];
+          const corr = bank.questions[q.s][String(q.n)];
+          if (a > 0 && a !== corr) {
+            wrongItems.push({
+              ...q,
+              origQNum: idx + 1,
+              userWrongAns: a,
+              correctAns: corr
+            });
+          }
+        });
+      }
+
+      clock.textContent = `Test ${tNum} · Wrong Answers Verification (${wrongItems.length})`;
+
+      if (!wrongItems.length) {
+        app.innerHTML = `
+          <div class="hero" style="text-align:center; padding:32px;">
+            <h2>🎉 Practice Test ${tNum} లో తప్పు సమాధానాలు ఏవీ లేవు! (0 Wrong Answers)</h2>
+            <p style="color:#526577;">మీరు అటెంప్ట్ చేసిన ప్రశ్నలలో తప్పులు ఏవీ లేవు.</p>
+            <button class="primary" onclick="list()">← Back to All Tests</button>
+          </div>
+        `;
+        return;
+      }
+
+      const cardsHtml = wrongItems.map((item, idx) => {
+        const key = item.s + ':' + item.n;
+        const image = bank.images[key];
+        const mask = bank.masks[key] || [0, 0];
+
+        const optionsReviewHtml = [1, 2, 3, 4].map(j => {
+          let cls = 'option-btn';
+          let badge = '';
+          if (j === item.correctAns) {
+            cls += ' correct-reveal';
+            badge = '<span>✔ సరైన సమాధానం (Correct Answer)</span>';
+          } else if (j === item.userWrongAns) {
+            cls += ' wrong-reveal';
+            badge = '<span>✖ మీరు పెట్టిన తప్పు ఆప్షన్ (Your Wrong Answer)</span>';
+          }
+          return `
+            <div class="${cls}" style="cursor:default;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <span class="opt-circle">${j}</span>
+                <span>Option (${j})</span>
+              </div>
+              ${badge}
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="study-card" style="border-left: 5px solid var(--danger);">
+            <div class="study-header" style="flex-wrap:wrap; gap:10px;">
+              <div>
+                <b style="font-size:1.12rem; color:#12365e;">Wrong #${idx + 1} · (Test ${tNum} - Question #${item.origQNum})</b>
+                <span class="badge" style="margin-left:8px;">${esc(item.s)} · ${esc(item.type)}</span>
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <span class="wrong-ans-pill">✖ మీరు పెట్టిన ఆప్షన్: Option (${item.userWrongAns})</span>
+                <span class="study-ans-pill">✔ సరైన ఆప్షన్: Option (${item.correctAns})</span>
+              </div>
+            </div>
+            <div class="crop-frame" style="--ml:${mask[0]}%;--mw:${mask[1]}%">
+              <img class="question-crop" loading="lazy" alt="${esc(item.s)} question" src="data:image/webp;base64,${image}">
+            </div>
+            <div class="option-list">${optionsReviewHtml}</div>
+          </div>
+        `;
+      }).join('');
+
+      app.innerHTML = `
+        <div class="hero">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div>
+              <h1 style="margin:0 0 6px; color:#991b1b;">❌ Practice Test ${tNum} · తప్పు పెట్టిన ప్రశ్నలు మాత్రమే (${wrongItems.length} Wrong Questions)</h1>
+              <p style="margin:0; color:#526577;">
+                ఈ టెస్ట్‌లో మీరు తప్పు పెట్టిన <b>${wrongItems.length} ప్రశ్నలు</b>, మీరు ఏ ఆప్షన్ పెట్టారో (<span style="color:var(--danger);font-weight:700;">Red</span>) మరియు అసలైన సరైన ఆప్షన్ ఏంటో (<span style="color:var(--success);font-weight:700;">Green</span>) క్రింద స్పష్టంగా చూడవచ్చు.
+              </p>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="primary" onclick="startTestWrongInteractive(${tIndex})">🎯 Re-Practice These ${wrongItems.length} Questions Now</button>
+              <button onclick="start(${tIndex})">🔄 Back to Test ${tNum}</button>
+              <button onclick="list()">🏠 All Tests</button>
+            </div>
+          </div>
+        </div>
+        ${cardsHtml}
+        <div class="hero" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <button class="primary" onclick="startTestWrongInteractive(${tIndex})">🎯 Re-Practice These ${wrongItems.length} Wrong Questions</button>
+          <button onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆ Back to Top</button>
+        </div>
+      `;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function startSubject(subjectName) {
@@ -689,7 +951,7 @@
       const items = Object.values(store.mistakes || {});
       if (!items.length) return;
       state = {
-        title: `Mistake Review (${items.length} Questions)`,
+        title: `All Mistakes Review (${items.length} Questions)`,
         test: 'Mistakes',
         isCustom: true,
         q: items,
@@ -733,6 +995,43 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function toggleOnlyWrongInTest() {
+      if (!state) return;
+      const wrongIndices = [];
+      state.answer.forEach((a, idx) => {
+        const qi = state.q[idx];
+        const corr = bank.questions[qi.s][String(qi.n)];
+        if (a > 0 && a !== corr) wrongIndices.push(idx);
+      });
+      if (!state.onlyWrongFilter && wrongIndices.length === 0) {
+        alert('ఈ టెస్ట్‌లో ఇప్పటివరకు తప్పు పెట్టిన ప్రశ్నలు ఏవీ లేవు! (No wrong answers in this test yet)');
+        return;
+      }
+      state.onlyWrongFilter = !state.onlyWrongFilter;
+      if (state.onlyWrongFilter && !wrongIndices.includes(state.at)) {
+        state.at = wrongIndices[0];
+      }
+      render();
+    }
+
+    function goPrevFiltered(wrongIndices) {
+      if (state.onlyWrongFilter && wrongIndices.length > 0) {
+        const prevList = wrongIndices.filter(idx => idx < state.at);
+        if (prevList.length > 0) go(prevList[prevList.length - 1]);
+      } else {
+        go(state.at - 1);
+      }
+    }
+
+    function goNextFiltered(wrongIndices) {
+      if (state.onlyWrongFilter && wrongIndices.length > 0) {
+        const nextList = wrongIndices.filter(idx => idx > state.at);
+        if (nextList.length > 0) go(nextList[0]);
+      } else {
+        go(state.at + 1);
+      }
+    }
+
     function choose(v) {
       state.answer[state.at] = v;
       const q = state.q[state.at];
@@ -760,7 +1059,7 @@
       go(Math.min(state.q.length - 1, state.at + 1));
     }
 
-    function questionMarkup(q, userAns, showFeedback) {
+    function questionMarkup(q, userAns, showFeedback, nextIdx) {
       const key = q.s + ':' + q.n;
       const image = bank.images[key];
       const mask = bank.masks[key] || [0, 0];
@@ -792,20 +1091,29 @@
         `;
       }).join('');
 
+      let prevWrongNote = '';
+      if (q.prevWrongAns && userAns === 0) {
+        prevWrongNote = `
+          <div style="margin-bottom:10px; padding:10px 14px; background:#fff5f6; border:1px solid #fecdd3; border-radius:9px; color:#991b1b; font-size:0.94rem;">
+            ⚠️ <b>Note:</b> In Practice Test ${q.parentTest} (Q #${q.origQNum}), you previously chose <b>Option (${q.prevWrongAns})</b> which was wrong. Try selecting the right answer now!
+          </div>
+        `;
+      }
+
       let bannerHtml = '';
       if (showFeedback && userAns > 0) {
         if (userAns === correct) {
           bannerHtml = `
             <div class="feedback-banner correct">
               <span>🎉 Correct! Option (${correct}) is the right answer.</span>
-              <button class="success" style="padding:6px 14px;" onclick="go(${Math.min(state.q.length - 1, state.at + 1)})">Next Question ➔</button>
+              <button class="success" style="padding:6px 14px;" onclick="go(${nextIdx})">Next Question ➔</button>
             </div>
           `;
         } else {
           bannerHtml = `
             <div class="feedback-banner wrong">
               <span>❌ Incorrect. You chose Option (${userAns}), but the correct answer is <b>Option (${correct})</b>.</span>
-              <button class="primary" style="padding:6px 14px;" onclick="go(${Math.min(state.q.length - 1, state.at + 1)})">Next Question ➔</button>
+              <button class="primary" style="padding:6px 14px;" onclick="go(${nextIdx})">Next Question ➔</button>
             </div>
           `;
         }
@@ -818,6 +1126,7 @@
       }
 
       return `
+        ${prevWrongNote}
         <div class="crop-frame" style="--ml:${mask[0]}%;--mw:${mask[1]}%">
           ${image ? `<img class="question-crop" alt="${esc(q.s)} question" src="data:image/webp;base64,${image}">` : `<p style="padding:20px;color:#a32335;">Image still loading... Please wait a moment and click refresh.</p>`}
         </div>
@@ -833,6 +1142,25 @@
       const total = state.q.length;
       const userAns = state.answer[i];
 
+      // Calculate live score & wrong indices for this test
+      let ansCount = 0;
+      let rightCount = 0;
+      const wrongIndices = [];
+      state.answer.forEach((a, idx) => {
+        if (a > 0) {
+          ansCount++;
+          const qi = state.q[idx];
+          if (a === bank.questions[qi.s][String(qi.n)]) rightCount++;
+          else wrongIndices.push(idx);
+        }
+      });
+      const wrongCount = ansCount - rightCount;
+
+      // Auto-turn off onlyWrongFilter if user corrected all wrong answers!
+      if (state.onlyWrongFilter && wrongIndices.length === 0) {
+        state.onlyWrongFilter = false;
+      }
+
       let tabs = '';
       let paletteStart = 0;
       let paletteLen = total;
@@ -844,57 +1172,83 @@
         tabs = `<nav class="tabs">` + names.map((s, n) => {
           const secIds = Array.from({ length: sizes[n] }, (_, k) => offsets[n] + k);
           const secAns = secIds.filter(idx => state.answer[idx] > 0).length;
-          return `<button class="${section === n ? 'active' : ''}" onclick="go(${offsets[n]})">${esc(s)} (${secAns}/${sizes[n]})</button>`;
+          return `<button class="${section === n ? 'active' : ''}" onclick="state.onlyWrongFilter=false; go(${offsets[n]})">${esc(s)} (${secAns}/${sizes[n]})</button>`;
         }).join('') + `</nav>`;
       }
 
-      // Calculate live score
-      let ansCount = 0;
-      let rightCount = 0;
-      state.answer.forEach((a, idx) => {
-        if (a > 0) {
-          ansCount++;
-          const qi = state.q[idx];
-          if (a === bank.questions[qi.s][String(qi.n)]) rightCount++;
-        }
-      });
+      let palette = '';
+      if (state.onlyWrongFilter) {
+        palette = wrongIndices.map(k => {
+          const klass = (k === i ? ' current' : '') + ' wrong-pal';
+          return `<button class="${klass}" onclick="go(${k})">${k + 1}</button>`;
+        }).join('');
+      } else {
+        palette = Array.from({ length: paletteLen }, (_, j) => {
+          const k = paletteStart + j;
+          const a = state.answer[k];
+          const qi = state.q[k];
+          const corr = bank.questions[qi.s][String(qi.n)];
+          let klass = (k === i ? ' current' : '');
+          if (state.marked[k]) klass += ' review';
+          else if (a > 0) {
+            if (instantMode) klass += (a === corr ? ' correct-pal' : ' wrong-pal');
+            else klass += ' answered';
+          }
+          return `<button class="${klass}" onclick="go(${k})">${k + 1}</button>`;
+        }).join('');
+      }
 
-      const palette = Array.from({ length: paletteLen }, (_, j) => {
-        const k = paletteStart + j;
-        const a = state.answer[k];
-        const qi = state.q[k];
-        const corr = bank.questions[qi.s][String(qi.n)];
-        let klass = (k === i ? ' current' : '');
-        if (state.marked[k]) klass += ' review';
-        else if (a > 0) {
-          if (instantMode) klass += (a === corr ? ' correct-pal' : ' wrong-pal');
-          else klass += ' answered';
-        }
-        return `<button class="${klass}" onclick="go(${k})">${k + 1}</button>`;
-      }).join('');
+      // Compute next question index respecting onlyWrongFilter
+      let nextIdx = Math.min(total - 1, i + 1);
+      if (state.onlyWrongFilter && wrongIndices.length > 0) {
+        const after = wrongIndices.filter(idx => idx > i);
+        nextIdx = after.length > 0 ? after[0] : wrongIndices[0];
+      }
+
+      const posInWrong = state.onlyWrongFilter ? (wrongIndices.indexOf(i) + 1) : 0;
 
       app.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
-          <div style="display:flex; align-items:center; gap:10px;">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <button onclick="list()">← Back to All Tests</button>
             <h2 style="margin:0; font-size:1.2rem; color:#12365e;">${esc(state.title)}</h2>
           </div>
-          ${instantMode ? `
-            <div style="background:#fff; padding:8px 14px; border-radius:10px; border:1px solid #d0deec; font-weight:600;">
-              Live Score: <span style="color:var(--success)">✔ ${rightCount} Correct</span> · 
-              <span style="color:var(--danger)">✖ ${ansCount - rightCount} Wrong</span> · 
-              <span>${ansCount}/${total} Attempted</span>
-            </div>
-          ` : ''}
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            ${instantMode ? `
+              <div style="background:#fff; padding:8px 14px; border-radius:10px; border:1px solid #d0deec; font-weight:600;">
+                Live Score: <span style="color:var(--success)">✔ ${rightCount} Correct</span> · 
+                <span style="color:var(--danger)">✖ ${wrongCount} Wrong</span> · 
+                <span>${ansCount}/${total} Attempted</span>
+              </div>
+            ` : ''}
+            ${wrongCount > 0 ? `
+              <button class="${state.onlyWrongFilter ? 'primary' : 'danger'}" style="font-weight:700;" onclick="toggleOnlyWrongInTest()">
+                ${state.onlyWrongFilter ? `🔄 Show All ${total} Questions` : `❌ Show Only Wrong (${wrongCount})`}
+              </button>
+              ${!state.isCustom ? `
+                <button class="danger" style="font-weight:700;" onclick="openTestWrongSheet(${state.tIndex})" title="Open all ${wrongCount} wrong questions on a single page to verify">
+                  📋 Verify Wrong Sheet (${wrongCount})
+                </button>
+              ` : ''}
+            ` : ''}
+          </div>
         </div>
 
-        ${tabs}
+        ${state.onlyWrongFilter ? `
+          <div style="background:var(--danger-bg); border:1px solid var(--danger-border); color:#991b1b; padding:10px 16px; border-radius:10px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; font-weight:600;">
+            <span>🔍 <b>Wrong Answers Filter Active:</b> Showing Wrong Question ${posInWrong} of ${wrongIndices.length} (Original Question #${i + 1}). Pick the right option to correct it!</span>
+            <button onclick="toggleOnlyWrongInTest()" style="padding:5px 12px; font-size:0.85rem;">✖ Exit Wrong Filter</button>
+          </div>
+        ` : tabs}
 
         <div class="layout">
           <div class="card">
             <div class="toolbar">
               <div>
-                <b style="font-size:1.1rem; color:#12365e;">Question ${i + 1} of ${total}</b>
+                <b style="font-size:1.1rem; color:#12365e;">
+                  Question ${i + 1} of ${total}
+                  ${q.origQNum ? ` <span style="color:#991b1b;">(Test ${q.parentTest} · Q #${q.origQNum})</span>` : ''}
+                </b>
                 <span class="badge" style="margin-left:8px;">${esc(q.s)} · ${esc(q.type)}</span>
               </div>
               <div style="display:flex; gap:8px;">
@@ -904,20 +1258,22 @@
               </div>
             </div>
 
-            ${questionMarkup(q, userAns, instantMode)}
+            ${questionMarkup(q, userAns, instantMode, nextIdx)}
 
             <div class="actions">
-              <button onclick="go(${i - 1})" ${i === 0 ? 'disabled' : ''}>⬅ Previous</button>
+              <button onclick='goPrevFiltered(${JSON.stringify(wrongIndices)})' ${(!state.onlyWrongFilter && i === 0) || (state.onlyWrongFilter && wrongIndices.indexOf(i) <= 0) ? 'disabled' : ''}>⬅ Previous ${state.onlyWrongFilter ? 'Wrong' : ''}</button>
               <button onclick="clearAnswer()">Clear Choice</button>
               <button onclick="mark()">${state.marked[i] ? 'Unmark Review' : '🔖 Mark for Review'}</button>
-              <button class="primary" style="margin-left:auto; padding:10px 22px;" onclick="go(${Math.min(total - 1, i + 1)})" ${i === total - 1 ? 'disabled' : ''}>
-                Next Question ➔
+              <button class="primary" style="margin-left:auto; padding:10px 22px;" onclick='goNextFiltered(${JSON.stringify(wrongIndices)})' ${(!state.onlyWrongFilter && i === total - 1) || (state.onlyWrongFilter && wrongIndices.indexOf(i) === wrongIndices.length - 1) ? 'disabled' : ''}>
+                Next ${state.onlyWrongFilter ? 'Wrong ' : ''}Question ➔
               </button>
             </div>
           </div>
 
           <aside class="card">
-            <h3 style="margin-top:0; color:#12365e;">${state.isCustom ? 'Questions' : esc(q.s) + ' Palette'}</h3>
+            <h3 style="margin-top:0; color:#12365e;">
+              ${state.onlyWrongFilter ? `❌ Wrong Questions (${wrongIndices.length})` : state.isCustom ? 'Questions' : esc(q.s) + ' Palette'}
+            </h3>
             <p class="legend">
               ${instantMode
                 ? '🟢 Green: Correct · 🔴 Red: Wrong · 🟣 Purple: Review'
@@ -925,6 +1281,11 @@
             </p>
             <div class="palette">${palette}</div>
             <div style="margin-top:16px; display:grid; gap:8px;">
+              ${wrongCount > 0 && !state.isCustom ? `
+                <button class="danger" style="font-weight:700;" onclick="openTestWrongSheet(${state.tIndex})">
+                  ❌ Verify Only Wrong Answers (${wrongCount})
+                </button>
+              ` : ''}
               <button class="primary" onclick="submit(false)">📊 View Full Scorecard &amp; Summary</button>
               <button onclick="list()">🏠 Save &amp; Return Home</button>
             </div>
@@ -950,16 +1311,17 @@
           const ids = Array.from({ length: sizes[idx] }, (_, j) => offsets[idx] + j);
           const right = ids.filter(i => state.answer[i] === bank.questions[state.q[i].s][String(state.q[i].n)]).length;
           const attempt = ids.filter(i => state.answer[i] > 0).length;
-          return { s, right, size: sizes[idx], attempt };
+          return { s, right, size: sizes[idx], attempt, wrong: attempt - right };
         });
         sectionRows = `
           <h2>Subject-wise Breakdown</h2>
           <table>
-            <tr><th>Subject</th><th>Correct</th><th>Attempted</th><th>Accuracy</th></tr>
+            <tr><th>Subject</th><th>Correct</th><th>Wrong</th><th>Attempted</th><th>Accuracy</th></tr>
             ${sections.map(x => `
               <tr>
                 <td><b>${esc(x.s)}</b></td>
                 <td style="color:var(--success);font-weight:700;">${x.right} / ${x.size}</td>
+                <td style="color:var(--danger);font-weight:700;">${x.wrong}</td>
                 <td>${x.attempt} / ${x.size}</td>
                 <td>${x.attempt ? Math.round((x.right / x.attempt) * 100) + '%' : '-'}</td>
               </tr>
@@ -970,6 +1332,7 @@
 
       const rightTotal = state.q.filter((q, i) => state.answer[i] === bank.questions[q.s][String(q.n)]).length;
       const attemptTotal = state.answer.filter(Boolean).length;
+      const wrongTotal = attemptTotal - rightTotal;
 
       app.innerHTML = `
         <div class="hero">
@@ -992,12 +1355,25 @@
             </div>
             <div class="stat-box">
               <small>Wrong Answers</small>
-              <strong style="color:var(--danger)">${attemptTotal - rightTotal}</strong>
+              <strong style="color:var(--danger)">${wrongTotal}</strong>
             </div>
           </div>
           ${sectionRows}
           <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="primary" onclick="state.done=false; render()">🔍 Return to Questions &amp; Review Answers</button>
+            ${wrongTotal > 0 && !state.isCustom ? `
+              <button class="danger" style="font-weight:700; padding:12px 18px;" onclick="openTestWrongSheet(${state.tIndex})">
+                ❌ Show Only Wrong Answers (${wrongTotal}) — Verify &amp; Learn
+              </button>
+              <button class="danger" style="font-weight:700; padding:12px 18px;" onclick="startTestWrongInteractive(${state.tIndex})">
+                🎯 Re-Practice Only Wrong Questions (${wrongTotal})
+              </button>
+            ` : ''}
+            ${wrongTotal > 0 && state.isCustom ? `
+              <button class="danger" style="font-weight:700; padding:12px 18px;" onclick="state.done=false; state.onlyWrongFilter=true; render()">
+                ❌ Show Only Wrong Answers (${wrongTotal})
+              </button>
+            ` : ''}
+            <button class="primary" onclick="state.done=false; state.onlyWrongFilter=false; render()">🔍 Return to All Questions</button>
             <button onclick="list()">🏠 All Practice Tests</button>
           </div>
         </div>
