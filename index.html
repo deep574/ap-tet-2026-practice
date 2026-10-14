@@ -92,6 +92,31 @@
       font-weight: 600;
     }
 
+    .btn-header-exam {
+      background: #f59e0b;
+      color: #78350f;
+      border: 1px solid #d97706;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .btn-header-exam:hover {
+      background: #fbbf24;
+      transform: translateY(-1px);
+    }
+    .btn-fullscreen {
+      background: #1e3a5f;
+      color: #fff;
+      border: 1px solid #3b82f6;
+      padding: 6px 12px;
+      border-radius: 7px;
+      font-size: 0.86rem;
+    }
+
     /* Official CBT Exam Hall Header with Candidate Photo & Details */
     .cbt-hall-card {
       background: #ffffff;
@@ -542,6 +567,9 @@
       </div>
     </div>
     <div class="header-controls">
+      <button id="btnHeaderRealExam" class="btn-header-exam" onclick="startGrandRealExam()">
+        🏆 START REAL EXAM ➔
+      </button>
       <div class="mode-switch" id="modeSwitch" style="display:none">
         <button id="btnInstantMode" class="active" onclick="setPracticeMode(true)" title="Shows right/wrong answer immediately when you click an option">⚡ Instant Answer Mode</button>
         <button id="btnExamMode" onclick="setPracticeMode(false)" title="Simulates real exam - answers shown after submit">📝 Real Exam Mode</button>
@@ -793,6 +821,10 @@
       const photoSrc = window.CANDIDATE_PHOTO || 'assets/candidate_photo.png';
       const logoSrc = window.AP_LOGO || 'assets/ap_logo.png';
 
+      // Show header real exam button on list view
+      const btnH = document.getElementById('btnHeaderRealExam');
+      if (btnH) btnH.style.display = 'inline-block';
+
       app.innerHTML = `
         <!-- Telugu Motivational Quote Banner -->
         <div class="quote-banner">
@@ -805,45 +837,17 @@
           </button>
         </div>
 
-        <!-- Official Candidate Hall Ticket Profile & Grand Real Exam Launcher -->
-        <div class="cbt-hall-card">
-          <div class="cbt-candidate-info">
-            <div class="candidate-img-box">
-              <img src="${photoSrc}" alt="Candidate Photo">
-            </div>
-            <div>
-              <span class="cbt-badge-tag">🎓 OFFICIAL CANDIDATE HALL TICKET PROFILE</span>
-              <div class="candidate-meta">
-                <span class="lbl">CANDIDATE NAME:</span>
-                <span class="val" style="color:#086aa9;">${esc(CANDIDATE_PROFILE.name)}</span>
-                <span class="lbl">HALL TICKET NO.:</span>
-                <span class="val">${esc(CANDIDATE_PROFILE.hallTicket)}</span>
-                <span class="lbl">FATHER NAME:</span>
-                <span class="val">${esc(CANDIDATE_PROFILE.fatherName)}</span>
-                <span class="lbl">DATE OF BIRTH:</span>
-                <span class="val">${esc(CANDIDATE_PROFILE.dob)}</span>
-              </div>
-            </div>
-          </div>
-          <div style="text-align:right;">
-            <button class="btn-grand-start" onclick="startGrandRealExam()">
-              🏆 START REAL EXAM (150 Q · 150 Mins) ➔
-            </button>
-            <small style="display:block; color:#64748b; margin-top:5px;">Exact CBT Exam Hall Pattern · Random 150 Questions</small>
-          </div>
-        </div>
-
         <!-- Grand Real Exam Feature Banner -->
         <div class="grand-exam-banner">
           <div>
             <h2>🎯 Real Exam Hall CBT Simulation (అసలైన పరీక్ష అనుకరణ)</h2>
             <p>
               సిలబస్ వెయిటేజీ ప్రకారం మొత్తం 150 ప్రశ్నలు (CDP 30, తెలుగు 30, ఇంగ్లీష్ 30, మ్యాథ్స్ 20, ఫిజిక్స్ 20, బయాలజీ 20).<br>
-              ప్రతిసారి <b>"🎲 Generate New Random Exam"</b> ద్వారా 1 నుండి 12 లెవల్స్ నుండి సరికొత్త 150 ప్రశ్నలతో అపరిమిత గ్రాండ్ టెస్టులు రాయవచ్చు!
+              పరీక్ష ప్రారంభించగానే అభ్యర్థి ఫోటో, హాల్ టికెట్ వివరాలతో <b>Full Screen Mode</b> లో అసలైన పరీక్షా కేంద్రంలా ప్రారంభమవుతుంది!
             </p>
           </div>
           <button class="btn-grand-start" onclick="startGrandRealExam()">
-            🎲 Generate New Random Exam ➔
+            🏆 START REAL EXAM (150 Q · 150 Mins) ➔
           </button>
         </div>
 
@@ -957,15 +961,32 @@
       return [...cdp30, ...telugu30, ...english30, ...math20, ...phy20, ...bio20];
     }
 
+    // Helper to request browser full screen mode
+    function enterFullScreen() {
+      try {
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen().catch(() => {});
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen();
+        }
+      } catch (err) {}
+    }
+
     // Launch Grand Real Exam
     function startGrandRealExam() {
+      // Enter Full Screen Mode as requested
+      enterFullScreen();
+
       const store = loadSavedData();
       store.grandExamCount = (store.grandExamCount || 0) + 1;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
 
       const q = generateGrandExamQuestions();
       state = {
-        title: `AP Special TET Real Exam Simulation · Grand Mock #${store.grandExamCount}`,
+        title: `AP Special TET Real Exam · CBT Hall Simulation #${store.grandExamCount}`,
         test: `GrandMock_${store.grandExamCount}`,
         isGrandExam: true,
         isCustom: false,
@@ -984,6 +1005,10 @@
       instantMode = false;
       modeSwitch.style.display = 'inline-flex';
       setPracticeMode(false);
+
+      const btnH = document.getElementById('btnHeaderRealExam');
+      if (btnH) btnH.style.display = 'none';
+
       startTimer();
       render();
     }
