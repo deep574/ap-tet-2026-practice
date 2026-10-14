@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>AP Special TET 2026 · SA Paper IIA · Instant Practice Hub</title>
+  <title>AP Special TET 2026 · SA Paper IIA · Real Exam Simulation &amp; Practice Portal</title>
   <style>
     :root {
       font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -42,10 +42,11 @@
     button.danger:hover:not(:disabled) { background: #ffe4e8; }
     button.success { background: var(--success); color: #fff; border-color: var(--success); }
 
+    /* Top Official AP Government Header */
     header {
       background: #12365e;
       color: white;
-      padding: 14px 20px;
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -57,7 +58,17 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.15);
     }
     .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
-    .brand strong { font-size: 1.2rem; }
+    .brand img.gov-logo {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 50%;
+      padding: 2px;
+      box-shadow: 0 0 6px rgba(255,255,255,0.4);
+    }
+    .brand-text h1 { margin: 0; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.2px; }
+    .brand-text small { color: #9bc0e4; font-size: 0.8rem; display: block; }
     .header-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
     .mode-switch {
@@ -81,6 +92,63 @@
       font-weight: 600;
     }
 
+    /* Official CBT Exam Hall Header with Candidate Photo & Details */
+    .cbt-hall-card {
+      background: #ffffff;
+      border: 2px solid #b7cee4;
+      border-top: 4px solid #086aa9;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: 0 3px 12px rgba(18, 54, 94, 0.08);
+    }
+    .cbt-candidate-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .candidate-img-box {
+      width: 68px;
+      height: 84px;
+      border: 2px solid #086aa9;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f0f4f8;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+    .candidate-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .candidate-meta {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 4px 14px;
+      font-size: 0.9rem;
+    }
+    .candidate-meta .lbl { color: #475569; font-weight: 600; }
+    .candidate-meta .val { color: #0f172a; font-weight: 700; }
+    .cbt-badge-tag {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #7dd3fc;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
     .wrap { max-width: 1440px; margin: auto; padding: 16px; }
     .hero, .card {
       background: #fff;
@@ -88,6 +156,39 @@
       box-shadow: 0 2px 12px rgba(30, 65, 97, 0.08);
       padding: 20px;
       margin-bottom: 16px;
+    }
+
+    /* Grand Exam Special Hero Banner */
+    .grand-exam-banner {
+      background: linear-gradient(135deg, #0b325e 0%, #17487f 100%);
+      color: #fff;
+      border-radius: 14px;
+      padding: 24px 26px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 18px rgba(11, 50, 94, 0.25);
+    }
+    .grand-exam-banner h2 { margin: 0 0 6px; font-size: 1.45rem; color: #fff; }
+    .grand-exam-banner p { margin: 0; color: #cbdcf0; font-size: 0.96rem; line-height: 1.5; }
+    .btn-grand-start {
+      background: #f59e0b;
+      color: #78350f;
+      border: 2px solid #d97706;
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 14px 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .btn-grand-start:hover {
+      background: #fbbf24;
+      transform: translateY(-2px);
     }
 
     .stats-bar {
@@ -391,23 +492,54 @@
       font-size: 0.95rem;
     }
 
+    /* Special Result Motivation Card */
+    .result-motivation-card {
+      background: linear-gradient(135deg, #fdfbf7 0%, #fff7ed 100%);
+      border: 2px solid #fdba74;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 18px 0;
+      box-shadow: 0 4px 14px rgba(234, 88, 12, 0.1);
+    }
+    .result-motivation-card .quote-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #9a3412;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .result-motivation-card .quote-body {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: #7c2d12;
+      font-weight: 600;
+    }
+
     @media (max-width: 860px) {
       .layout { display: block; }
       aside { margin-top: 16px; }
       .wrap { padding: 10px; }
       .hero, .card { padding: 14px; }
       .palette { grid-template-columns: repeat(8, 1fr); }
+      .cbt-hall-card { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 500px) {
       .palette { grid-template-columns: repeat(5, 1fr); }
       .option-list { grid-template-columns: 1fr 1fr; }
+      .candidate-meta { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="brand" onclick="list()">
-      <strong>AP Special TET 2026 · SA Paper IIA (Maths &amp; Science)</strong>
+      <img id="headerLogo" class="gov-logo" alt="AP Govt Logo" src="assets/ap_logo.png">
+      <div class="brand-text">
+        <h1>AP SPECIAL TET - 2026 · SA Paper IIA</h1>
+        <small>Government of Andhra Pradesh · In-Service Teachers Eligibility Test</small>
+      </div>
     </div>
     <div class="header-controls">
       <div class="mode-switch" id="modeSwitch" style="display:none">
@@ -425,6 +557,9 @@
     </div>
   </main>
 
+  <!-- Base64 Encoded Local Assets (Logo & Candidate Photo) -->
+  <script src="assets/base64_assets.js"></script>
+
   <!-- Load Image Scripts Directly from Official Practice Server -->
   <script src="https://tet2026.govtjobnews9.com/paper2a/maths-science/assets/cdp-images.js"></script>
   <script src="https://tet2026.govtjobnews9.com/paper2a/maths-science/assets/telugu-images.js"></script>
@@ -438,6 +573,15 @@
     const sizes = [30, 30, 30, 20, 20, 20];
     const minutes = [30, 30, 30, 20, 20, 20];
     const offsets = [0, 30, 60, 90, 110, 130];
+
+    // Official Candidate Profile from Hall Ticket
+    const CANDIDATE_PROFILE = {
+      hallTicket: '26IST000499706',
+      name: 'EEDUPUGANTI NAGAMANI',
+      fatherName: 'MADHUSUDHANA RAO',
+      dob: '11-JUN-1977',
+      examCenter: 'AP Special TET CBT Lab'
+    };
 
     const teluguQuotes = [
       {
@@ -475,7 +619,7 @@
     let bank = null;
     let state = null;
     let tick = null;
-    let instantMode = true; // Default to Instant Answer Mode as requested!
+    let instantMode = true; // Default to Instant Answer Mode for practice
     let peeked = false;
     let autoNextDelay = false;
 
@@ -489,9 +633,9 @@
     const STORAGE_KEY = 'ap_tet_2026_maths_sci_v1';
     function loadSavedData() {
       try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { tests: {}, mistakes: {} };
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || { tests: {}, mistakes: {}, grandExamCount: 0 };
       } catch (e) {
-        return { tests: {}, mistakes: {} };
+        return { tests: {}, mistakes: {}, grandExamCount: 0 };
       }
     }
     function saveCurrentTestState() {
@@ -524,6 +668,11 @@
         const res = await fetch('bank.json');
         bank = await res.json();
         bank.images = window.QuizImages || {};
+        // Set logo src from base64 if available
+        if (window.AP_LOGO) {
+          const logoEl = document.getElementById('headerLogo');
+          if (logoEl) logoEl.src = window.AP_LOGO;
+        }
         list();
       } catch (err) {
         app.innerHTML = `<div class="hero"><h2>Error loading bank.json</h2><p>${esc(err.message)}</p></div>`;
@@ -641,8 +790,11 @@
       }).join('');
 
       const curQuote = teluguQuotes[quoteIdx];
+      const photoSrc = window.CANDIDATE_PHOTO || 'assets/candidate_photo.png';
+      const logoSrc = window.AP_LOGO || 'assets/ap_logo.png';
 
       app.innerHTML = `
+        <!-- Telugu Motivational Quote Banner -->
         <div class="quote-banner">
           <div>
             <div class="quote-text" id="quoteText">${esc(curQuote.q)}</div>
@@ -650,6 +802,48 @@
           </div>
           <button onclick="nextQuote()" style="background:#fff; border-color:#f59e0b; color:#92400e; font-size:0.86rem; padding:7px 12px; white-space:nowrap;">
             ✨ మరో మంచి మాట (Next Quote)
+          </button>
+        </div>
+
+        <!-- Official Candidate Hall Ticket Profile & Grand Real Exam Launcher -->
+        <div class="cbt-hall-card">
+          <div class="cbt-candidate-info">
+            <div class="candidate-img-box">
+              <img src="${photoSrc}" alt="Candidate Photo">
+            </div>
+            <div>
+              <span class="cbt-badge-tag">🎓 OFFICIAL CANDIDATE HALL TICKET PROFILE</span>
+              <div class="candidate-meta">
+                <span class="lbl">CANDIDATE NAME:</span>
+                <span class="val" style="color:#086aa9;">${esc(CANDIDATE_PROFILE.name)}</span>
+                <span class="lbl">HALL TICKET NO.:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.hallTicket)}</span>
+                <span class="lbl">FATHER NAME:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.fatherName)}</span>
+                <span class="lbl">DATE OF BIRTH:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.dob)}</span>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <button class="btn-grand-start" onclick="startGrandRealExam()">
+              🏆 START REAL EXAM (150 Q · 150 Mins) ➔
+            </button>
+            <small style="display:block; color:#64748b; margin-top:5px;">Exact CBT Exam Hall Pattern · Random 150 Questions</small>
+          </div>
+        </div>
+
+        <!-- Grand Real Exam Feature Banner -->
+        <div class="grand-exam-banner">
+          <div>
+            <h2>🎯 Real Exam Hall CBT Simulation (అసలైన పరీక్ష అనుకరణ)</h2>
+            <p>
+              సిలబస్ వెయిటేజీ ప్రకారం మొత్తం 150 ప్రశ్నలు (CDP 30, తెలుగు 30, ఇంగ్లీష్ 30, మ్యాథ్స్ 20, ఫిజిక్స్ 20, బయాలజీ 20).<br>
+              ప్రతిసారి <b>"🎲 Generate New Random Exam"</b> ద్వారా 1 నుండి 12 లెవల్స్ నుండి సరికొత్త 150 ప్రశ్నలతో అపరిమిత గ్రాండ్ టెస్టులు రాయవచ్చు!
+            </p>
+          </div>
+          <button class="btn-grand-start" onclick="startGrandRealExam()">
+            🎲 Generate New Random Exam ➔
           </button>
         </div>
 
@@ -709,6 +903,91 @@
       });
     }
 
+    // Helper: sample k random unique elements from an array
+    function sampleArray(arr, k) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy.slice(0, k);
+    }
+
+    // Generate Unlimited Random Grand Exam (150 Questions with Exact Weightage)
+    function generateGrandExamQuestions() {
+      // 1. CDP: 30 Questions (from 360)
+      const cdpAll = Object.keys(bank.questions['CDP']).map(Number);
+      const cdp30 = sampleArray(cdpAll, 30).map(n => ({ s: 'CDP', n, type: 'Content' }));
+
+      // 2. Telugu: 30 Questions (from 360)
+      const teluguAll = Object.keys(bank.questions['Telugu']).map(Number);
+      const telugu30 = sampleArray(teluguAll, 30).map(n => ({ s: 'Telugu', n, type: 'Content' }));
+
+      // 3. English: 30 Questions (from 360)
+      const englishAll = Object.keys(bank.questions['English']).map(Number);
+      const english30 = sampleArray(englishAll, 30).map(n => ({ s: 'English', n, type: 'Content' }));
+
+      // 4. Mathematics: 16 Content (<=192) + 4 Methodology (>192) = 20
+      const mathAll = Object.keys(bank.questions['Mathematics']).map(Number);
+      const mathContent = mathAll.filter(n => n <= 192);
+      const mathMethod = mathAll.filter(n => n > 192);
+      const math20 = [
+        ...sampleArray(mathContent, 16).map(n => ({ s: 'Mathematics', n, type: 'Content' })),
+        ...sampleArray(mathMethod, 4).map(n => ({ s: 'Mathematics', n, type: 'Methodology' }))
+      ];
+
+      // 5. Physical Science: 16 Content (<=192) + 4 Methodology (>192) = 20
+      const phyAll = Object.keys(bank.questions['Physical Science']).map(Number);
+      const phyContent = phyAll.filter(n => n <= 192);
+      const phyMethod = phyAll.filter(n => n > 192);
+      const phy20 = [
+        ...sampleArray(phyContent, 16).map(n => ({ s: 'Physical Science', n, type: 'Content' })),
+        ...sampleArray(phyMethod, 4).map(n => ({ s: 'Physical Science', n, type: 'Methodology' }))
+      ];
+
+      // 6. Biological Science: 16 Content (<=192) + 4 Methodology (>192) = 20
+      const bioAll = Object.keys(bank.questions['Biological Science']).map(Number);
+      const bioContent = bioAll.filter(n => n <= 192);
+      const bioMethod = bioAll.filter(n => n > 192);
+      const bio20 = [
+        ...sampleArray(bioContent, 16).map(n => ({ s: 'Biological Science', n, type: 'Content' })),
+        ...sampleArray(bioMethod, 4).map(n => ({ s: 'Biological Science', n, type: 'Methodology' }))
+      ];
+
+      return [...cdp30, ...telugu30, ...english30, ...math20, ...phy20, ...bio20];
+    }
+
+    // Launch Grand Real Exam
+    function startGrandRealExam() {
+      const store = loadSavedData();
+      store.grandExamCount = (store.grandExamCount || 0) + 1;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+
+      const q = generateGrandExamQuestions();
+      state = {
+        title: `AP Special TET Real Exam Simulation · Grand Mock #${store.grandExamCount}`,
+        test: `GrandMock_${store.grandExamCount}`,
+        isGrandExam: true,
+        isCustom: false,
+        onlyWrongFilter: false,
+        q,
+        answer: Array(150).fill(0),
+        seen: Array(150).fill(false),
+        marked: Array(150).fill(false),
+        at: 0,
+        left: 9000, // 150 minutes
+        done: false
+      };
+      state.seen[0] = true;
+      peeked = false;
+      // Real Exam Mode: Do not reveal answers during exam
+      instantMode = false;
+      modeSwitch.style.display = 'inline-flex';
+      setPracticeMode(false);
+      startTimer();
+      render();
+    }
+
     function resetTest(tNum) {
       if (!confirm(`Clear saved answers for Practice Test ${tNum}?`)) return;
       const store = loadSavedData();
@@ -728,6 +1007,7 @@
           title: `Practice Test ${tNum}`,
           test: tNum,
           tIndex: tIndex,
+          isGrandExam: false,
           isCustom: false,
           onlyWrongFilter: false,
           q,
@@ -743,6 +1023,7 @@
           title: `Practice Test ${tNum}`,
           test: tNum,
           tIndex: tIndex,
+          isGrandExam: false,
           isCustom: false,
           onlyWrongFilter: false,
           q,
@@ -795,6 +1076,7 @@
         title: `Practice Test ${tNum} · Wrong Answers Only (${wrongItems.length} Questions)`,
         test: `Test_${tNum}_Wrong`,
         parentTestNum: tNum,
+        isGrandExam: false,
         isCustom: true,
         q: wrongItems,
         answer: Array(wrongItems.length).fill(0),
@@ -806,7 +1088,9 @@
       };
       state.seen[0] = true;
       peeked = false;
+      instantMode = true; // allow instant practice on retry
       modeSwitch.style.display = 'inline-flex';
+      setPracticeMode(true);
       startTimer();
       render();
     }
@@ -920,6 +1204,119 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // View & Verify Sheet for Grand Real Exam Wrong Answers
+    function openGrandExamWrongSheet() {
+      if (!state || !state.lastExamResults) return;
+      clearInterval(tick);
+      modeSwitch.style.display = 'none';
+
+      const wrongItems = state.lastExamResults.wrongList;
+      clock.textContent = `Grand Real Exam · Wrong Answers Verification (${wrongItems.length})`;
+
+      const cardsHtml = wrongItems.map((item, idx) => {
+        const key = item.s + ':' + item.n;
+        const image = bank.images[key];
+        const mask = bank.masks[key] || [0, 0];
+
+        const optionsReviewHtml = [1, 2, 3, 4].map(j => {
+          let cls = 'option-btn';
+          let badge = '';
+          if (j === item.correctAns) {
+            cls += ' correct-reveal';
+            badge = '<span>✔ సరైన సమాధానం (Correct Answer)</span>';
+          } else if (j === item.userWrongAns) {
+            cls += ' wrong-reveal';
+            badge = '<span>✖ మీరు పెట్టిన తప్పు ఆప్షన్ (Your Wrong Answer)</span>';
+          }
+          return `
+            <div class="${cls}" style="cursor:default;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <span class="opt-circle">${j}</span>
+                <span>Option (${j})</span>
+              </div>
+              ${badge}
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="study-card" style="border-left: 5px solid var(--danger);">
+            <div class="study-header" style="flex-wrap:wrap; gap:10px;">
+              <div>
+                <b style="font-size:1.12rem; color:#12365e;">Wrong #${idx + 1} · (Grand Exam Question #${item.origQNum})</b>
+                <span class="badge" style="margin-left:8px;">${esc(item.s)} · ${esc(item.type)}</span>
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <span class="wrong-ans-pill">✖ మీరు పెట్టిన ఆప్షన్: Option (${item.userWrongAns})</span>
+                <span class="study-ans-pill">✔ సరైన ఆప్షన్: Option (${item.correctAns})</span>
+              </div>
+            </div>
+            <div class="crop-frame" style="--ml:${mask[0]}%;--mw:${mask[1]}%">
+              <img class="question-crop" loading="lazy" alt="${esc(item.s)} question" src="data:image/webp;base64,${image}">
+            </div>
+            <div class="option-list">${optionsReviewHtml}</div>
+          </div>
+        `;
+      }).join('');
+
+      app.innerHTML = `
+        <div class="hero">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div>
+              <h1 style="margin:0 0 6px; color:#991b1b;">❌ Grand Real Exam · తప్పు పెట్టిన ప్రశ్నలు (${wrongItems.length} Wrong Questions)</h1>
+              <p style="margin:0; color:#526577;">
+                పరీక్షలో మీరు తప్పు పెట్టిన ప్రశ్నలు, మీరు పెట్టిన ఆప్షన్ (<span style="color:var(--danger);font-weight:700;">Red</span>) మరియు అసలైన సరైన ఆప్షన్ (<span style="color:var(--success);font-weight:700;">Green</span>) స్పష్టంగా పరిశీలించండి.
+              </p>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="primary" onclick="retryGrandExamWrongs()">🎯 Re-Practice These ${wrongItems.length} Wrong Questions</button>
+              <button onclick="results()">📊 Back to Scorecard</button>
+              <button onclick="list()">🏠 All Tests</button>
+            </div>
+          </div>
+        </div>
+        ${cardsHtml}
+        <div class="hero" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <button class="primary" onclick="retryGrandExamWrongs()">🎯 Re-Practice These ${wrongItems.length} Wrong Questions</button>
+          <button onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆ Back to Top</button>
+        </div>
+      `;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function retryGrandExamWrongs() {
+      if (!state || !state.lastExamResults) return;
+      const wrongItems = state.lastExamResults.wrongList.map(item => ({
+        s: item.s,
+        n: item.n,
+        type: item.type,
+        origQNum: item.origQNum,
+        prevWrongAns: item.userWrongAns,
+        parentTest: 'Grand Real Exam'
+      }));
+
+      state = {
+        title: `Grand Real Exam · Retrying Mistakes (${wrongItems.length} Q)`,
+        test: 'GrandMock_Mistakes',
+        isGrandExam: false,
+        isCustom: true,
+        q: wrongItems,
+        answer: Array(wrongItems.length).fill(0),
+        seen: Array(wrongItems.length).fill(false),
+        marked: Array(wrongItems.length).fill(false),
+        at: 0,
+        left: wrongItems.length * 60,
+        done: false
+      };
+      state.seen[0] = true;
+      peeked = false;
+      instantMode = true;
+      modeSwitch.style.display = 'inline-flex';
+      setPracticeMode(true);
+      startTimer();
+      render();
+    }
+
     function startSubject(subjectName) {
       const qNums = Object.keys(bank.questions[subjectName]).map(Number).sort((a, b) => a - b);
       const q = qNums.map(n => ({
@@ -930,6 +1327,7 @@
       state = {
         title: `${subjectName} · Complete Bank (${q.length} Q)`,
         test: subjectName,
+        isGrandExam: false,
         isCustom: true,
         q,
         answer: Array(q.length).fill(0),
@@ -953,6 +1351,7 @@
       state = {
         title: `All Mistakes Review (${items.length} Questions)`,
         test: 'Mistakes',
+        isGrandExam: false,
         isCustom: true,
         q: items,
         answer: Array(items.length).fill(0),
@@ -1095,7 +1494,7 @@
       if (q.prevWrongAns && userAns === 0) {
         prevWrongNote = `
           <div style="margin-bottom:10px; padding:10px 14px; background:#fff5f6; border:1px solid #fecdd3; border-radius:9px; color:#991b1b; font-size:0.94rem;">
-            ⚠️ <b>Note:</b> In Practice Test ${q.parentTest} (Q #${q.origQNum}), you previously chose <b>Option (${q.prevWrongAns})</b> which was wrong. Try selecting the right answer now!
+            ⚠️ <b>Note:</b> In ${q.parentTest} (Q #${q.origQNum}), you previously chose <b>Option (${q.prevWrongAns})</b> which was wrong. Try selecting the right answer now!
           </div>
         `;
       }
@@ -1206,8 +1605,38 @@
       }
 
       const posInWrong = state.onlyWrongFilter ? (wrongIndices.indexOf(i) + 1) : 0;
+      const photoSrc = window.CANDIDATE_PHOTO || 'assets/candidate_photo.png';
+
+      // Hall Ticket CBT banner inside the test
+      const cbtHeaderHtml = `
+        <div class="cbt-hall-card" style="padding:10px 14px; margin-bottom:12px;">
+          <div class="cbt-candidate-info" style="gap:12px;">
+            <div class="candidate-img-box" style="width:54px; height:68px;">
+              <img src="${photoSrc}" alt="Candidate Photo">
+            </div>
+            <div>
+              <span class="cbt-badge-tag" style="font-size:0.78rem;">${state.isGrandExam ? '🏛️ AP SPECIAL TET 2026 OFFICIAL CBT EXAM HALL' : 'PRACTICE TEST CANDIDATE'}</span>
+              <div class="candidate-meta" style="font-size:0.84rem; gap:2px 12px;">
+                <span class="lbl">NAME:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.name)}</span>
+                <span class="lbl">HT NO:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.hallTicket)}</span>
+                <span class="lbl">FATHER:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.fatherName)}</span>
+                <span class="lbl">DOB:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.dob)}</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="timer" style="font-size:1.15rem; background:#086aa9;">${clock.textContent}</span>
+          </div>
+        </div>
+      `;
 
       app.innerHTML = `
+        ${cbtHeaderHtml}
+
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:8px;">
           <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
             <button onclick="list()">← Back to All Tests</button>
@@ -1220,12 +1649,16 @@
                 <span style="color:var(--danger)">✖ ${wrongCount} Wrong</span> · 
                 <span>${ansCount}/${total} Attempted</span>
               </div>
-            ` : ''}
-            ${wrongCount > 0 ? `
+            ` : `
+              <div style="background:#fff; padding:8px 14px; border-radius:10px; border:1px solid #d0deec; font-weight:600;">
+                Attempted: <span style="color:var(--primary)">${ansCount} / ${total}</span>
+              </div>
+            `}
+            ${wrongCount > 0 && instantMode ? `
               <button class="${state.onlyWrongFilter ? 'primary' : 'danger'}" style="font-weight:700;" onclick="toggleOnlyWrongInTest()">
                 ${state.onlyWrongFilter ? `🔄 Show All ${total} Questions` : `❌ Show Only Wrong (${wrongCount})`}
               </button>
-              ${!state.isCustom ? `
+              ${!state.isCustom && !state.isGrandExam ? `
                 <button class="danger" style="font-weight:700;" onclick="openTestWrongSheet(${state.tIndex})" title="Open all ${wrongCount} wrong questions on a single page to verify">
                   📋 Verify Wrong Sheet (${wrongCount})
                 </button>
@@ -1247,14 +1680,16 @@
               <div>
                 <b style="font-size:1.1rem; color:#12365e;">
                   Question ${i + 1} of ${total}
-                  ${q.origQNum ? ` <span style="color:#991b1b;">(Test ${q.parentTest} · Q #${q.origQNum})</span>` : ''}
+                  ${q.origQNum ? ` <span style="color:#991b1b;">(${q.parentTest} · Q #${q.origQNum})</span>` : ''}
                 </b>
                 <span class="badge" style="margin-left:8px;">${esc(q.s)} · ${esc(q.type)}</span>
               </div>
               <div style="display:flex; gap:8px;">
-                <button onclick="togglePeek()" style="padding:6px 12px; background:#fffbeb; border-color:#f59e0b; color:#92400e;">
-                  👁 ${peeked ? 'Hide Answer' : 'Show Answer'}
-                </button>
+                ${instantMode ? `
+                  <button onclick="togglePeek()" style="padding:6px 12px; background:#fffbeb; border-color:#f59e0b; color:#92400e;">
+                    👁 ${peeked ? 'Hide Answer' : 'Show Answer'}
+                  </button>
+                ` : ''}
               </div>
             </div>
 
@@ -1277,16 +1712,18 @@
             <p class="legend">
               ${instantMode
                 ? '🟢 Green: Correct · 🔴 Red: Wrong · 🟣 Purple: Review'
-                : '🔵 Blue: Answered · 🟣 Purple: Review'}
+                : '🔵 Blue: Answered · ⚪ White: Unanswered · 🟣 Purple: Review'}
             </p>
             <div class="palette">${palette}</div>
             <div style="margin-top:16px; display:grid; gap:8px;">
-              ${wrongCount > 0 && !state.isCustom ? `
+              ${wrongCount > 0 && !state.isCustom && !state.isGrandExam && instantMode ? `
                 <button class="danger" style="font-weight:700;" onclick="openTestWrongSheet(${state.tIndex})">
                   ❌ Verify Only Wrong Answers (${wrongCount})
                 </button>
               ` : ''}
-              <button class="primary" onclick="submit(false)">📊 View Full Scorecard &amp; Summary</button>
+              <button class="primary" style="background:#059669; border-color:#059669;" onclick="submit(false)">
+                📝 SUBMIT TEST &amp; VIEW SCORE
+              </button>
               <button onclick="list()">🏠 Save &amp; Return Home</button>
             </div>
           </aside>
@@ -1295,6 +1732,7 @@
     }
 
     function submit(auto = false) {
+      if (!auto && !confirm(`Submit ${state.title}? You will see your final score and detailed answer review immediately.`)) return;
       state.done = true;
       clearInterval(tick);
       saveCurrentTestState();
@@ -1302,8 +1740,52 @@
     }
 
     function results() {
-      clock.textContent = 'Scorecard Summary';
+      clock.textContent = 'Exam Scorecard & Review';
       const total = state.q.length;
+
+      // Calculate right and wrong details
+      const wrongList = [];
+      const rightTotal = state.q.filter((q, i) => {
+        const userA = state.answer[i];
+        const corrA = bank.questions[q.s][String(q.n)];
+        if (userA > 0 && userA !== corrA) {
+          wrongList.push({
+            ...q,
+            origQNum: i + 1,
+            userWrongAns: userA,
+            correctAns: corrA
+          });
+        }
+        return userA === corrA;
+      }).length;
+
+      const attemptTotal = state.answer.filter(Boolean).length;
+      const wrongTotal = attemptTotal - rightTotal;
+      const unattempted = total - attemptTotal;
+
+      state.lastExamResults = { rightTotal, attemptTotal, wrongTotal, wrongList };
+
+      // Telugu Motivational Feedback according to the user's score specification:
+      // Score < 90 marks: Inka prepare avvali baga...
+      // Score 90-109 marks: Good qualify...
+      // Score 110-119 marks: Super inka prepare avvu...
+      // Score 120+ marks: Inka motivation quote in Telugu...
+      let quoteTitle = "";
+      let quoteBody = "";
+
+      if (rightTotal < 90) {
+        quoteTitle = "🌸 అమ్మా, అధైర్యపడకు! ఇంకా సమయం ఉంది... బాగా రివిజన్ చేయి! 📚💪";
+        quoteBody = `“అమ్మా! ఈ ఫలితం చూసి ఏమాత్రం కంగారు పడకు. పరీక్షకు ముందు తప్పులు తెలియడమే మనకు లభించిన గొప్ప అవకాశం! క్రింద ఉన్న <b>'❌ తప్పు పెట్టిన ప్రశ్నలను మాత్రమే సరిచూసుకోండి'</b> బటన్ నొక్కి, నువ్వు తప్పు పెట్టిన ప్రశ్నలను ఒక్కసారి చూసుకో. రేపటి పరీక్షలో నువ్వు ఖచ్చితంగా విజయం సాధిస్తావు!” 💐✨`;
+      } else if (rightTotal >= 90 && rightTotal < 110) {
+        quoteTitle = "👍 మంచి ప్రయత్నం అమ్మా! క్వాలిఫై అయ్యే దిశగా మంచి స్కోరు! ఇంకా ప్రిపేర్ అవ్వు! 🌟📖";
+        quoteBody = `“చాలా బాగుంది అమ్మా! 90 కంటే ఎక్కువ మార్కులు సాధించి చక్కని ప్రతిభ కనబరిచావు! ఇంకొద్దిగా శ్రద్ధ పెట్టి తప్పు పోయిన ప్రశ్నలను రివిజన్ చేసుకుంటే, రేపటి పరీక్షలో 115+ స్కోరు సులభంగా సాధించగలవు. నీ కష్టానికి తగిన ప్రతిఫలం ఖచ్చితంగా దక్కుతుంది!” 🎯🌺`;
+      } else if (rightTotal >= 110 && rightTotal < 120) {
+        quoteTitle = "🎉 సూపర్ అమ్మా! అద్భుతమైన ప్రతిభ! ఇంకా ప్రిపేర్ అవ్వు, టాప్ ర్యాంక్ నీదే! 🚀🏆";
+        quoteBody = `“సూపర్ అమ్మా! 110 కి పైగా స్కోరు సాధించి అద్భుతమైన విజయం దిశగా నిలిచావు! నీ సన్నద్ధత చాలా గొప్పగా ఉంది. మిగిలిన చిన్న చిన్న తప్పులను ఒక్కసారి సరిచూసుకుంటే రేపటి పరీక్షలో నువ్వు టాప్ స్కోరర్‌గా నిలవడం ఖాయం. ఆల్ ది వెరీ బెస్ట్!” 💐🌟`;
+      } else {
+        quoteTitle = "👑 అద్భుతం అమ్మా! 120+ స్కోరుతో చరిత్ర సృష్టిస్తావు! నువ్వే టాపర్! 🥇🎉🔥";
+        quoteBody = `“సాటిలేని అసాధారణ ప్రతిభ అమ్మా! 120+ మార్కులు సాధించి నీ సత్తా ఏంటో నిరూపించావు! నీ ఏకాగ్రత, పట్టుదల, కష్టానికి జోహార్లు! రేపటి అక్టోబర్ 15 AP Special TET పరీక్షలో కూడా ఇదే ఆత్మవిశ్వాసంతో రాయి... రాష్ట్ర స్థాయి ర్యాంక్ ఖచ్చితంగా నీదే! మా అందరి ఆశీస్సులు, శుభాకాంక్షలు నీతోనే ఉన్నాయి!” 💐✨❤️`;
+      }
 
       let sectionRows = '';
       if (!state.isCustom) {
@@ -1314,9 +1796,9 @@
           return { s, right, size: sizes[idx], attempt, wrong: attempt - right };
         });
         sectionRows = `
-          <h2>Subject-wise Breakdown</h2>
+          <h2 style="color:#12365e; margin:20px 0 10px;">📊 Subject-wise Breakdown (సబ్జెక్టుల వారీగా ఫలితాలు)</h2>
           <table>
-            <tr><th>Subject</th><th>Correct</th><th>Wrong</th><th>Attempted</th><th>Accuracy</th></tr>
+            <tr><th>Subject</th><th>Correct (ఒప్పు)</th><th>Wrong (తప్పు)</th><th>Attempted</th><th>Accuracy</th></tr>
             ${sections.map(x => `
               <tr>
                 <td><b>${esc(x.s)}</b></td>
@@ -1330,14 +1812,44 @@
         `;
       }
 
-      const rightTotal = state.q.filter((q, i) => state.answer[i] === bank.questions[q.s][String(q.n)]).length;
-      const attemptTotal = state.answer.filter(Boolean).length;
-      const wrongTotal = attemptTotal - rightTotal;
+      const photoSrc = window.CANDIDATE_PHOTO || 'assets/candidate_photo.png';
 
       app.innerHTML = `
+        <!-- Official Candidate Hall Ticket Summary Header -->
+        <div class="cbt-hall-card" style="margin-bottom:16px;">
+          <div class="cbt-candidate-info">
+            <div class="candidate-img-box" style="width:68px; height:84px;">
+              <img src="${photoSrc}" alt="Candidate Photo">
+            </div>
+            <div>
+              <span class="cbt-badge-tag">🎓 CANDIDATE SCORECARD &amp; OFFICIAL PERFORMANCE REPORT</span>
+              <div class="candidate-meta">
+                <span class="lbl">NAME:</span>
+                <span class="val" style="color:#086aa9;">${esc(CANDIDATE_PROFILE.name)}</span>
+                <span class="lbl">HALL TICKET NO.:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.hallTicket)}</span>
+                <span class="lbl">FATHER NAME:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.fatherName)}</span>
+                <span class="lbl">DOB:</span>
+                <span class="val">${esc(CANDIDATE_PROFILE.dob)}</span>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <span style="font-size:2rem; font-weight:800; color:var(--primary); display:block;">${rightTotal} / ${total}</span>
+            <small style="color:#475569; font-weight:600;">FINAL SCORE (${Math.round(rightTotal/total*100)}%)</small>
+          </div>
+        </div>
+
+        <!-- Telugu Motivational Feedback Card -->
+        <div class="result-motivation-card">
+          <div class="quote-title">${quoteTitle}</div>
+          <div class="quote-body">${quoteBody}</div>
+        </div>
+
         <div class="hero">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-            <h1 style="margin:0;">${esc(state.title)} · Scorecard</h1>
+            <h1 style="margin:0; font-size:1.4rem; color:#12365e;">${esc(state.title)} · Result Scorecard</h1>
             <button onclick="list()">← Back to All Tests</button>
           </div>
           <div class="stats-bar">
@@ -1347,37 +1859,55 @@
             </div>
             <div class="stat-box">
               <small>Attempted</small>
-              <strong>${attemptTotal}</strong>
+              <strong>${attemptTotal} / ${total}</strong>
             </div>
             <div class="stat-box">
               <small>Correct Answers</small>
-              <strong style="color:var(--success)">${rightTotal}</strong>
+              <strong style="color:var(--success)">${rightTotal} ✔</strong>
             </div>
             <div class="stat-box">
               <small>Wrong Answers</small>
-              <strong style="color:var(--danger)">${wrongTotal}</strong>
+              <strong style="color:var(--danger)">${wrongTotal} ✖</strong>
+            </div>
+            <div class="stat-box">
+              <small>Unanswered</small>
+              <strong style="color:#64748b">${unattempted}</strong>
             </div>
           </div>
+
           ${sectionRows}
-          <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
-            ${wrongTotal > 0 && !state.isCustom ? `
-              <button class="danger" style="font-weight:700; padding:12px 18px;" onclick="openTestWrongSheet(${state.tIndex})">
-                ❌ Show Only Wrong Answers (${wrongTotal}) — Verify &amp; Learn
+
+          <!-- Direct Action Buttons to Inspect and Fix Wrong Answers -->
+          <div style="margin-top:24px; padding-top:18px; border-top:1px solid #e2e8f0; display:flex; gap:12px; flex-wrap:wrap;">
+            ${wrongTotal > 0 ? `
+              <button class="danger" style="font-weight:700; font-size:1.05rem; padding:12px 22px;" onclick="${state.isGrandExam ? 'openGrandExamWrongSheet()' : (state.isCustom ? 'state.done=false; state.onlyWrongFilter=true; render()' : 'openTestWrongSheet(' + state.tIndex + ')') }">
+                ❌ Show Only Wrong Answers (${wrongTotal}) — Verify &amp; Correct Now
               </button>
-              <button class="danger" style="font-weight:700; padding:12px 18px;" onclick="startTestWrongInteractive(${state.tIndex})">
-                🎯 Re-Practice Only Wrong Questions (${wrongTotal})
+              ${state.isGrandExam ? `
+                <button class="danger" style="font-weight:700; font-size:1.05rem; padding:12px 22px;" onclick="retryGrandExamWrongs()">
+                  🎯 Re-Practice These ${wrongTotal} Wrong Questions
+                </button>
+              ` : (!state.isCustom ? `
+                <button class="danger" style="font-weight:700; font-size:1.05rem; padding:12px 22px;" onclick="startTestWrongInteractive(${state.tIndex})">
+                  🎯 Re-Practice These ${wrongTotal} Wrong Questions
+                </button>
+              ` : '')}
+            ` : `
+              <div style="background:var(--success-bg); color:var(--success); border:1px solid var(--success-border); padding:10px 18px; border-radius:9px; font-weight:700;">
+                🎉 అద్భుతం! ఒక్క తప్పు కూడా లేదు! (0 Wrong Answers)
+              </div>
+            `}
+            ${state.isGrandExam ? `
+              <button class="btn-grand-start" style="padding:10px 20px;" onclick="startGrandRealExam()">
+                🎲 Generate Another Random Exam ➔
               </button>
             ` : ''}
-            ${wrongTotal > 0 && state.isCustom ? `
-              <button class="danger" style="font-weight:700; padding:12px 18px;" onclick="state.done=false; state.onlyWrongFilter=true; render()">
-                ❌ Show Only Wrong Answers (${wrongTotal})
-              </button>
-            ` : ''}
-            <button class="primary" onclick="state.done=false; state.onlyWrongFilter=false; render()">🔍 Return to All Questions</button>
+            <button class="primary" onclick="state.done=false; state.onlyWrongFilter=false; render()">🔍 Question-wise Full Review</button>
             <button onclick="list()">🏠 All Practice Tests</button>
           </div>
         </div>
       `;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Quick Read / Study Sheet Mode (View all questions + answers on one page)
